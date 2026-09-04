@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block title %} Esas Sehife  {% endblock %}
+
+{% block content %}
+  
+
+<main class="home-page">
+    <p class="home-eyebrow">Student management</p>
+    <h1>Esas Sehife</h1>
+
+
+    <section class="home-panel">
+    <h2>
+    
+    <!-- Bazada {{ students_count }}  sagird var -->
+
+    {{ student }}
+
+
+    <!-- {% for student in students_name %}
+
+
+        {{ forloop.counter}}.
+        {{ student.name }} <br>
+        {{ student.email }} <br>
+
+
+
+    {% endfor %} -->
+    
+
+
+    </h2>
+   </section>
+
+
+
+
+
+
+{% comment %}
+    
+
+    
+
+        {% for s in student %}
+
+            {{ s.name }} <br>
+            {{ s.email }} <br>
+            {{ s.age }} <br>
+            {{ s.price }} <br>
+            {{ s.created_at }} <br>
+            {{ s.updated_at }} <br>
+
+
+        {% endfor %}
+
+{% endcomment %}
+    
+    <!-- jinja -->
+     
+     {% comment %}
+        
+     
+        
+    <!-- {% %} -->
+
+    {% endcomment %}
+    
+
+  
+</main>
+
+
+    <!-- {% for product in products %}
+
+        {{ forloop.counter }}
+        {{ product }} <br>
+
+    {% endfor %} -->
+
+    
+    <!-- {% if number  == 10 %}
+
+        success
+
+    {% else %}
+
+        error
+        
+    {% endif %} -->
+
+
+
+    
+
+
+
+ <!-- <form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="username" placeholder="Username">
+
+    <input type="password" name="password" placeholder="Password">
+
+    <button type="submit">
+    Daxil ol
+    </button>
+
+</form>  -->
+
+
+
+   <!-- <h1>Salam {{ name }} {{ surname}}</h1>  -->
+
+   <!-- {{ products }} -->
+
+
+
+   <!-- <h1>Salam Dünya</h1>
+
+
+   <h4>Salam Dünya</h4>
+<p>Bu mənim ilk səhifəmdir.</p>
+
+
+<button>Daxil ol</button>
+<br><br><br>
+
+
+<a href="http://localhost:8000/about">About</a>
+
+<img src="https://static.vecteezy.com/system/resources/thumbnails/054/876/032/small/mirror-image-snow-capped-mountain-peaks-reflected-in-pristine-lake-free-photo.jpg" alt="aciqlama">
+<br><br>
+
+<input type="text">
+
+<input type="checkbox" name="" id="">
+
+<input type="radio" name="" id=""> -->
+
+
+{% endblock  %}

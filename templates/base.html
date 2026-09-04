@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}  {% endblock %}</title>
+</head>
+
+<body class="site-body">
+
+<header class="site-header">
+
+<a href="{% url 'home' %}">Esas Sehife</a>
+<a href="{% url 'about' %}">Haqqimizda</a>
+<a href="{% url 'contact' %}">Elaqe</a>
+
+
+</header>
+
+  {% block content %} 
+  
+
+  
+  {% endblock %}
+
+</body>
+</html>
