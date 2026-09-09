@@ -46,7 +46,7 @@
     </style>
 </head>
 
-<a href="{% url 'add_task' %}">
+<a href="{% url 'add_task' %}" class="btn btn-success m-3">
     Add New Task
 </a>
 
@@ -85,7 +85,7 @@
                             {{ task.description }}
                         </p>
 
-                        <a href="{% url 'task_detail' task.id %}">
+                        <a href="{% url 'task_detail' task.id %}" class="btn btn-sm btn-outline-primary">
                             Detail
                         </a>
 
