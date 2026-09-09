@@ -220,5 +220,24 @@ def logout_view(request):
     return redirect("login")
 
 def admin_dashboard(request):
-    
-    return render(request, "admin_dashboard.html")
+    users = User.objects.all()
+
+    total_users = users.count()
+    active_users = users.filter(is_active=True).count()
+
+    context = {
+        "users": users,
+        "total_users": total_users,
+        "active_users": active_users,
+    }
+
+    return render(request, "admin_dashboard.html", context)
+
+def toggle_user_active(request, user_id):
+    if request.method == "POST":
+        user = User.objects.get(id=user_id)
+
+        user.is_active = not user.is_active
+        user.save()
+
+    return redirect("admindashboard")

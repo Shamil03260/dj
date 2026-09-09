@@ -17,6 +17,11 @@ urlpatterns = [
     path("register/",views.register,name="register"),
     path("login/",views.login_view,name="login"),
     path("logout/",views.logout_view,name="logout"),
-    path("admindashboard/",views.admin_dashboard,name="admindashboard")
+    path("admindashboard/",views.admin_dashboard,name="admindashboard"),
+    path(
+        "toggle-user-active/<int:user_id>/",
+        views.toggle_user_active,
+        name="toggle_user_active"
+    ),
     
 ]
