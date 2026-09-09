@@ -25,4 +25,8 @@ urlpatterns = [
     ),
     path("todolist/", views.to_do_list_view, name="todolist"),
     path("add-task/", views.add_task, name="add_task"),
+    path("task-detail/<int:pk>/", views.task_detail, name="task_detail"),
+    path("edit-task/<int:pk>/", views.edit_task, name="edit_task"),
+    path("delete-task/<int:pk>/", views.delete_task, name="delete_task"),
+    path("toggle-task-completed/<int:pk>/", views.toggle_task_completed, name="toggle_task_completed"),
 ]

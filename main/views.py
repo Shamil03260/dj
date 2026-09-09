@@ -244,9 +244,13 @@ def toggle_user_active(request, user_id):
 
 
 def to_do_list_view(request):
-    users = User.objects.all()
+    tasks = Tasks.objects.all().order_by("-created_at")
+
+    context = {
+        "tasks": tasks
+    }
     
-    return render(request, "to_do_list.html")
+    return render(request, "to_do_list.html", context)
 
 def add_task(request):
     if request.method == "POST":
@@ -261,3 +265,49 @@ def add_task(request):
         return redirect("todolist")
 
     return render(request, "add_task.html")
+
+def task_detail(request, pk):
+    task = get_object_or_404(Tasks, id=pk)
+    
+    context = {
+        "task": task
+    }
+
+    return render(request, "task_detail.html", context)
+
+
+def edit_task(request, pk):
+    task = get_object_or_404(Tasks, id=pk)
+
+    if request.method == "POST":
+        task.title = request.POST.get("title")
+        task.description = request.POST.get("description")
+        task.save()
+
+        return redirect("task_detail", pk=task.id)
+    
+    context = {
+        "task": task
+    }
+
+    return render(request, "edit_task.html", context)
+
+def delete_task(request, pk):
+    task = get_object_or_404(Tasks, id=pk)
+
+    if request.method == "POST":
+        task.delete()
+        return redirect("todolist")
+    context = {
+        "task": task
+        
+    }
+    return render(request, "delete_task.html", context)
+
+def toggle_task_completed(request, pk):
+    task = get_object_or_404(Tasks, id=pk)
+
+    task.completed = not task.completed
+    task.save()
+
+    return redirect("todolist")
