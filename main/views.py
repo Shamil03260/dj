@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect, get_object_or_404
 from django.http import HttpResponse
-from . models import Student
+from . models import Student, Tasks
 from django.db.models import Q
 from django.db.models import F
 from django.contrib import messages

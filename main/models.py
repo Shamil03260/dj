@@ -26,3 +26,9 @@ class Student(models.Model):
     
     def __str__(self):
         return f'{self.name} | {self.email}'
+    
+class Tasks(models.Model):
+    title = models.CharField(max_length=50)
+    description = models.CharField(max_length=100)
+    completed = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
