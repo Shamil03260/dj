@@ -187,7 +187,7 @@ def register(request):
                 user.save()
                 return redirect("login")
         else:
-            messages.error(request, "Password doesn't matches")
+            messages.error(request, "Password doesn't match")
             return redirect('register')
 
     return render(request,"register.html")
@@ -218,5 +218,4 @@ def logout_view(request):
     logout(request)
     
     return redirect("login")
-
 
