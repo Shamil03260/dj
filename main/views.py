@@ -209,7 +209,7 @@ def login_view(request):
             else:
                 request.session.set_expiry(0)
                 
-            return redirect("table")
+            return redirect("admindashboard")
 
     return render(request,"login.html")
 
@@ -219,3 +219,6 @@ def logout_view(request):
     
     return redirect("login")
 
+def admin_dashboard(request):
+    
+    return render(request, "admin_dashboard.html")

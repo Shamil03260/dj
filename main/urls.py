@@ -16,7 +16,7 @@ urlpatterns = [
     path("details/<int:student_id>",views.details_student,name="details_student"),
     path("register/",views.register,name="register"),
     path("login/",views.login_view,name="login"),
-    path("logout/",views.logout_view,name="logout")
-
+    path("logout/",views.logout_view,name="logout"),
+    path("admindashboard/", view.admin_dashboard,name=admindashboard)
     
 ]
