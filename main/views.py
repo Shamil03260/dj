@@ -263,6 +263,7 @@ def add_task(request):
 
         return redirect("todolist")
 
+
     return render(request, "add_task.html")
 
 def task_detail(request, pk):
