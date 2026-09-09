@@ -223,12 +223,11 @@ def admin_dashboard(request):
     users = User.objects.all()
 
     total_users = users.count()
-    active_users = users.filter(is_active=True).count()
+    
 
     context = {
         "users": users,
-        "total_users": total_users,
-        "active_users": active_users,
+        "total_users": total_users
     }
 
     return render(request, "admin_dashboard.html", context)

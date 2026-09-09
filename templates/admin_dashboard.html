@@ -369,11 +369,7 @@
 
                     <div class="dashboard-card-value">
 
-                        {% for user in users %}
-                            {% if user.is_active %}
-                                {{ forloop.counter }}
-                            {% endif %}
-                        {% endfor %}
+                        {{request.user}}
 
                     </div>
                 </div>
