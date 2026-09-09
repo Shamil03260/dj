@@ -23,5 +23,5 @@ urlpatterns = [
         views.toggle_user_active,
         name="toggle_user_active"
     ),
-    
+    path("to_do_list/", views.to_do_list_view, name="todolist")
 ]

@@ -241,3 +241,8 @@ def toggle_user_active(request, user_id):
         user.save()
 
     return redirect("admindashboard")
+
+
+def to_do_list_view(request):
+    
+    return render(request, "to_do_list.html")
