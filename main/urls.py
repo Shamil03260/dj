@@ -23,5 +23,6 @@ urlpatterns = [
         views.toggle_user_active,
         name="toggle_user_active"
     ),
-    path("to_do_list/", views.to_do_list_view, name="todolist")
+    path("todolist/", views.to_do_list_view, name="todolist"),
+    path("add-task/", views.add_task, name="add_task"),
 ]

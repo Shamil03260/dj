@@ -244,5 +244,20 @@ def toggle_user_active(request, user_id):
 
 
 def to_do_list_view(request):
+    users = User.objects.all()
     
     return render(request, "to_do_list.html")
+
+def add_task(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+
+        Tasks.objects.create(
+            title=title,
+            description=description
+        )
+
+        return redirect("todolist")
+
+    return render(request, "add_task.html")
