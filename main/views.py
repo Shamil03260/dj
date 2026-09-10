@@ -253,15 +253,20 @@ def to_do_list_view(request):
 
 def add_task(request):
     if request.method == "POST":
-        title = request.POST.get("title")
-        description = request.POST.get("description")
+        if request.POST.get('cancel') == 'cancel':
+            return redirect("todolist")
+        else:
+            title = request.POST.get("title")
+            description = request.POST.get("description")
+        
+        
 
-        Tasks.objects.create(
-            title=title,
-            description=description
-        )
+            Tasks.objects.create(
+                title=title,
+                description=description
+            )
 
-        return redirect("todolist")
+            return redirect("todolist")
 
 
     return render(request, "add_task.html")
