@@ -31,14 +31,10 @@
         {{ task.created_at }}
     </p>
 
-    <a href="{% url 'todolist' %}" class="btn btn-secondary">
-        Back to Tasks
-    </a>
     <br>
     <a href="{% url 'edit_task' task.id %}" class="btn btn-primary">
         Edit Task
     </a>
-
 
 
     <form method="POST"
@@ -49,6 +45,15 @@
     <button type="submit" class="btn btn-danger">
         Delete Task
     </button>
+
+    <br>
+    <a href="{% url 'todolist' %}" class="btn btn-success">
+        Back to Tasks
+    </a>
+
+
+
+
 
 </body>
 </html>
