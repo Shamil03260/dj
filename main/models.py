@@ -32,3 +32,16 @@ class Tasks(models.Model):
     description = models.CharField(max_length=100)
     completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    
+class Movie(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    year = models.IntegerField()
+    genre = models.CharField(max_length=100)
+    rating = models.FloatField()
+    image = models.ImageField(upload_to="movies/", blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

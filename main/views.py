@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect, get_object_or_404
 from django.http import HttpResponse
-from . models import Student, Tasks
+from . models import Student, Tasks, Movie
 from django.db.models import Q
 from django.db.models import F
 from django.contrib import messages
@@ -316,3 +316,5 @@ def toggle_task_completed(request, pk):
     task.save()
 
     return redirect("todolist")
+
+
