@@ -30,7 +30,7 @@ urlpatterns = [
     path("delete-task/<int:pk>/", views.delete_task, name="delete_task"),
     path("toggle-task-completed/<int:pk>/", views.toggle_task_completed, name="toggle_task_completed"),
     # movies
-    path("", views.movie_list, name="movie_list"),
+    path("movies/", views.movie_list, name="movie_list"),
     path("movie/<int:movie_id>/", views.movie_detail, name="movie_detail"),
     path("add-movie/", views.add_movie, name="add_movie"),
     path("movie/<int:movie_id>/edit/", views.edit_movie, name="edit_movie"),

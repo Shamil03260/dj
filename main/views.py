@@ -317,4 +317,108 @@ def toggle_task_completed(request, pk):
 
     return redirect("todolist")
 
+# movies
+def movie_list(request):
+    movies = Movie.objects.all()
 
+    search = request.GET.get("search")
+    genre = request.GET.get("genre")
+    year = request.GET.get("year")
+    rating = request.GET.get("rating")
+
+    if search:
+        movies = movies.filter(title__icontains=search)
+
+    if genre:
+        movies = movies.filter(genre__iexact=genre)
+
+    if year:
+        movies = movies.filter(year=year)
+
+    if rating:
+        movies = movies.filter(rating__gte=rating)
+
+    genres = Movie.objects.values_list("genre", flat=True).distinct()
+    years = Movie.objects.values_list("year", flat=True).distinct()
+
+    context = {
+        "movies": movies,
+        "genres": genres,
+        "years": years,
+    }
+
+    return render(request, "movie_list.html", context)
+
+
+def movie_detail(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    
+    context = {
+        "movie": movie
+    }
+
+    return render(request, "movie_detail.html", context)
+
+
+def add_movie(request):
+    if request.method == "POST":
+
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        year = request.POST.get("year")
+        genre = request.POST.get("genre")
+        rating = request.POST.get("rating")
+        image = request.FILES.get("image")
+
+        Movie.objects.create(
+            title=title,
+            description=description,
+            year=year,
+            genre=genre,
+            rating=rating,
+            image=image
+        )
+
+        return redirect("movie_list")
+
+    return render(request, "add_movie.html")
+
+
+def edit_movie(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+
+    if request.method == "POST":
+
+        movie.title = request.POST.get("title")
+        movie.description = request.POST.get("description")
+        movie.year = request.POST.get("year")
+        movie.genre = request.POST.get("genre")
+        movie.rating = request.POST.get("rating")
+
+        if request.FILES.get("image"):
+            movie.image = request.FILES.get("image")
+
+        movie.save()
+
+        return redirect("movie_detail", movie_id=movie.id)
+
+    context = {
+        "movie": movie
+    }
+    
+    
+    return render(request, "edit_movie.html", context)
+
+
+def delete_movie(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+
+    if request.method == "POST":
+        movie.delete()
+        return redirect("movie_list")
+
+    context = {
+        "movie": movie
+    }
+    
+    return render(request, "delete_movie.html", context)
