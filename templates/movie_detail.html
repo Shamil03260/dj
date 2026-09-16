@@ -20,7 +20,7 @@
             {% if movie.image %}
 
                 <img
-                    src="{% static '{{ movie.image.url }}' %}"
+                    src="{{ movie.image.url }}"
                     class="img-fluid rounded shadow"
                 >
 
