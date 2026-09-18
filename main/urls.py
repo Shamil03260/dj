@@ -35,4 +35,10 @@ urlpatterns = [
     path("add-movie/", views.add_movie, name="add_movie"),
     path("movie/<int:movie_id>/edit/", views.edit_movie, name="edit_movie"),
     path("movie/<int:movie_id>/delete/", views.delete_movie, name="delete_movie"),
+    # authors
+    path("authors/", views.authors, name="authors"),
+    path("authors/<int:id>/", views.author_detail, name="author_detail"),
+    path("books/", views.books, name="books"),
+    path("books/<int:id>/", views.book_detail, name="book_detail"),
+    
 ]

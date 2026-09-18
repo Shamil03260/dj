@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect, get_object_or_404
 from django.http import HttpResponse
-from . models import Student, Tasks, Movie
+from . models import Student, Tasks, Movie, Author, Book
 from django.db.models import Q
 from django.db.models import F
 from django.contrib import messages
@@ -422,3 +422,45 @@ def delete_movie(request, movie_id):
     }
     
     return render(request, "delete_movie.html", context)
+
+
+# author
+def authors(request):
+    authors = Author.objects.all()
+
+    context = {
+        "authors": authors
+    }
+    
+    return render(request, "authors.html", context)
+
+
+def author_detail(request, id):
+    author = get_object_or_404(Author, id=id)
+    
+
+    context = {
+        "author": author
+    }
+
+    return render(request, "author_detail.html", context)
+
+
+def books(request):
+    books = Book.objects.all()
+    
+    context = {
+        "books": books
+    }
+
+    return render(request, "books.html", context)
+
+
+def book_detail(request, id):
+    book = get_object_or_404(Book, id=id)
+
+    context = {
+        "book": book
+    }
+    
+    return render(request, "book_detail.html", context)

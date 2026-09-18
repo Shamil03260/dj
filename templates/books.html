@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <title>Kitablar</title>
+</head>
+
+<body class="bg-light">
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h1 class="fw-bold">Kitablar</h1>
+
+        <a href="{% url 'authors' %}" class="btn btn-outline-primary">
+            Müəlliflər
+        </a>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-dark">
+
+                    <tr>
+                        <th>Kitab</th>
+                        <th>Qiymət</th>
+                        <th>Nəşr tarixi</th>
+                        <th>Müəllif</th>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for book in books %}
+
+                    <tr>
+
+                        <td>
+                            <a href="{% url 'book_detail' book.id %}"
+                               class="fw-semibold text-decoration-none">
+                                {{ book.title }}
+                            </a>
+                        </td>
+
+                        <td>
+                            <span class="badge text-bg-success">
+                                {{ book.price }} ₼
+                            </span>
+                        </td>
+
+                        <td>
+                            {{ book.published_date }}
+                        </td>
+
+                        <td>
+                            <a href="{% url 'author_detail' book.author.id %}"
+                               class="text-decoration-none">
+                                {{ book.author.name }}
+                                {{ book.author.surname }}
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="4" class="text-center py-4">
+                            Heç bir kitab yoxdur.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
