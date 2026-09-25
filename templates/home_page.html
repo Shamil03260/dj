@@ -201,6 +201,17 @@
             border: none;
             border-radius: 10px;
         }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            }
+
+        .sidebar a:hover {
+            text-decoration: none;
+            color: white;
+            }
+
     </style>
 
 </head>
@@ -254,11 +265,12 @@
 
         </button> -->
 
-        <a href="{% url 'profile' %}">{{teacher.full_name}}</a>
+        <a href="{% url 'profile' %}" class="teacher-button">{{teacher.full_name}}</a>
+        
 
     </div>
 
-
+    
     <!-- Navigation -->
 
     <nav class="sidebar-nav mt-2">
@@ -433,7 +445,7 @@
 
     <footer class="main-footer">
 
-        Copyright © 23.09.2026 Orient Academy.
+        Copyright © {% now 'Y-m-d' %} Orient Academy.
 
     </footer>
 
