@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from . models import Student, courses, Teacher
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url="orientlogin")
 def home_page(request):
     teacher_id = request.session.get("teacher_id")
     
