@@ -8,7 +8,7 @@ class Teacher(models.Model):
         return f"{self.full_name} {self.email}"
     
 class courses(models.Model):
-    name = models.Model.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     teacher = models.ForeignKey(
         Teacher,
         on_delete=models.CASCADE
@@ -26,3 +26,5 @@ class Student(models.Model):
     
     def __str__(self):
         return {self.name}
+    
+    
