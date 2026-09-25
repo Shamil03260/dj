@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+
+<html lang="az">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ORIENT ACADEMY - Daxil Ol</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font: Open Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #eef2f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            background-color: #ffffff;
+            border: 1px solid #e1e6ea;
+            border-radius: 6px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .login-header {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .brand-logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #2b3035;
+            border: 2px solid #6c757d;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .login-title {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+        }
+
+        .login-subtitle {
+            font-size: 12.5px;
+            color: #c2c7d0;
+            margin-bottom: 0;
+        }
+
+        .login-body {
+            padding: 2rem;
+        }
+
+        .form-control:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+
+        .input-group-text {
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+            color: #6c757d;
+        }
+
+        .btn-custom-login {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 10px 16px;
+            border-radius: 4px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-custom-login:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+            color: #ffffff;
+        }
+
+        .form-check-input:checked {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .toggle-password {
+            cursor: pointer;
+        }
+
+        .login-footer {
+            background-color: #ffffff;
+            border-top: 1px solid #dee2e6;
+            padding: 0.8rem 1.5rem;
+            font-size: 13px;
+            color: #777777;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .error-message {
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <!-- Login Header -->
+        <div class="login-header">
+
+            <div class="brand-logo-icon">
+                A
+            </div>
+
+            <h1 class="login-title">
+                ORIENT ACADEMY
+            </h1>
+
+            <p class="login-subtitle">
+                Daxil olmaq üçün məlumatlarınızı daxil edin
+            </p>
+
+        </div>
+
+
+        <!-- Login Body -->
+        <div class="login-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- Error Message -->
+                {% if error %}
+
+                    <div class="alert alert-danger error-message">
+                        {{ error }}
+                    </div>
+
+                {% endif %}
+
+
+                <!-- Username -->
+                <div class="mb-3">
+
+                    <label for="username"
+                           class="form-label text-dark fw-bold"
+                           style="font-size: 13px;">
+
+                        İstifadəçi adı
+
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+
+                        <input
+                            name="username"
+                            type="text"
+                            class="form-control"
+                            id="username"
+                            placeholder="E-poçt və ya istifadəçi adını yazın"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="mb-3">
+
+                    <label for="password"
+                           class="form-label text-dark fw-bold"
+                           style="font-size: 13px;">
+
+                        Parol
+
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-lock"></i>
+                        </span>
+
+                        <input
+                            name="password"
+                            type="password"
+                            class="form-control"
+                            id="password"
+                            placeholder="Parolu yazın"
+                            required>
+
+                        <span
+                            class="input-group-text toggle-password"
+                            onclick="togglePasswordVisibility()">
+
+                            <i class="fa-solid fa-eye" id="toggleIcon"></i>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Remember Me -->
+                <div class="d-flex justify-content-between align-items-center mb-4"
+                     style="font-size: 13px;">
+
+                    <div class="form-check mb-0">
+
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="remember_me"
+                            id="rememberMe"
+                            checked>
+
+                        <label
+                            class="form-check-label text-secondary"
+                            for="rememberMe">
+
+                            Məni xatırla
+
+                        </label>
+
+                    </div>
+
+
+                    <a href="#"
+                       class="text-decoration-none text-primary fw-semibold">
+
+                        Parolu unutmusunuz?
+
+                    </a>
+
+                </div>
+
+
+                <!-- Login Button -->
+                <button
+                    type="submit"
+                    class="btn btn-custom-login w-100">
+
+                    <i class="fa-solid fa-right-to-bracket me-2"></i>
+
+                    Daxil Ol
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+    function togglePasswordVisibility() {
+
+        const passwordInput = document.getElementById("password");
+        const toggleIcon = document.getElementById("toggleIcon");
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+
+        } else {
+
+            passwordInput.type = "password";
+
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+
+        }
+
+    }
+
+</script>
+
+</body>
+
+</html>
+
