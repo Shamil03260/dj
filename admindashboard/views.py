@@ -167,5 +167,22 @@ def login_dashboard(request):
 
 def lesson_detail(request, lesson_id):
 
-    return render(request, "lesson_detail.html")
+    teacher_id = request.session.get("teacher_id")
 
+    if not teacher_id:
+        return redirect("orientlogin")
+
+    teacher = Teacher.objects.get(id=teacher_id)
+
+    lesson = get_object_or_404(Lesson, id=lesson_id)
+    
+    students = Student.objects.filter(course=lesson.course)
+
+
+    context = {
+        "teacher": teacher,
+        "lesson": lesson,
+        "students":students
+    }
+
+    return render(request, "lesson_detail.html", context)
