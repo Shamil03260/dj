@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>{{ course.name }} - Qrup</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+    }
+
+    /* Top Bar */
+
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .group-info {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .btn-geri {
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-geri:hover {
+      background-color: #5a6268;
+    }
+
+    /* Table */
+
+    .table-container {
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    th {
+      font-weight: bold;
+      color: #000;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-left: 1px solid #e0e0e0;
+      width: 250px;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .score-input-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .score-input {
+      width: 100px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .btn-save {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .btn-save:hover {
+      background-color: #0069d9;
+    }
+
+    /* Section Titles */
+
+    h2 {
+      font-size: 22px;
+      font-weight: normal;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #212529;
+    }
+
+    /* Form */
+
+    .lesson-form {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .form-input {
+      padding: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .form-input.topic {
+      flex: 2;
+    }
+
+    .form-input.date {
+      flex: 1;
+    }
+
+    .btn-create {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .btn-create:hover {
+      background-color: #0069d9;
+    }
+
+    /* Cards */
+
+    .card {
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 15px;
+      background-color: #fff;
+    }
+
+    .card-link {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .card-link:hover {
+      text-decoration: underline;
+    }
+
+    .empty {
+      color: #777;
+      padding: 10px 0;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- TOP HEADER -->
+
+  <div class="top-header">
+
+    <div class="group-info">
+
+      Qrup adı:
+      <strong>{{ course.name }}</strong>
+
+    </div>
+
+    <a
+      href="{% url 'group' %}"
+      class="btn-geri"
+    >
+      &#8592; Geri
+    </a>
+
+  </div>
+
+
+  <!-- STUDENTS -->
+
+  <div class="table-container">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Tələbənin S.A.A</th>
+          <th>İmtahan nəticəsi</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {% for student in students %}
+
+        <tr>
+
+          <td>
+            {{ student.name }}
+          </td>
+
+          <td>
+
+            <form method="POST">
+
+              {% csrf_token %}
+
+              <input
+                type="hidden"
+                name="student_id"
+                value="{{ student.id }}"
+              >
+
+              <div class="score-input-group">
+
+                <input
+                  type="number"
+                  name="score"
+                  class="score-input"
+                  value="{{ student.score }}"
+                  min="0"
+                  max="100"
+                >
+
+                <button
+                  type="submit"
+                  name="save_score"
+                  class="btn-save"
+                >
+                  Yadda<br>saxla
+                </button>
+
+              </div>
+
+            </form>
+
+          </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+          <td colspan="2">
+            Bu qrupda hələ tələbə yoxdur.
+          </td>
+
+        </tr>
+
+        {% endfor %}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- DƏRSLƏR -->
+
+  <h2>Dərslər</h2>
+
+  <form
+    method="POST"
+    class="lesson-form"
+  >
+
+    {% csrf_token %}
+
+    <input
+      type="text"
+      name="topic"
+      class="form-input topic"
+      placeholder="Dərsin mövzusu"
+      required
+    >
+
+    <input
+      type="date"
+      name="start_date"
+      class="form-input date"
+      required
+    >
+
+    <input
+      type="date"
+      name="end_date"
+      class="form-input date"
+      required
+    >
+
+    <button
+      type="submit"
+      name="create_lesson"
+      class="btn-create"
+    >
+      Dərs yarat
+    </button>
+
+  </form>
+
+
+  <!-- MÖVCUD DƏRSLƏR -->
+
+  <h2>Mövcud Dərslər</h2>
+
+  {% for lesson in lessons %}
+
+    <div class="card">
+
+      <a
+        href="#"
+        class="card-link"
+      >
+        {{ lesson.topic }}
+      </a>
+
+      <div style="margin-top: 8px; font-size: 13px; color: #777;">
+
+        {{ lesson.start_date }}
+        -
+        {{ lesson.end_date }}
+
+      </div>
+
+    </div>
+
+  {% empty %}
+
+    <div class="empty">
+      Hələ heç bir dərs yaradılmayıb.
+    </div>
+
+  {% endfor %}
+
+
+</div>
+
+</body>
+</html>

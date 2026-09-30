@@ -40,4 +40,16 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+
+class Lesson(models.Model):
+    topic = models.CharField(max_length=200)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    course = models.ForeignKey(
+        courses,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.topic
