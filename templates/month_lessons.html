@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ month_name }} {{ year }}</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #212529;
+        }
+
+        .month-title {
+            padding: 22px 48px;
+            font-size: 20px;
+            color: #087ff5;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table-wrapper {
+            padding: 25px 32px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #dee2e6;
+            padding: 18px 14px;
+        }
+
+        th {
+            font-size: 17px;
+            text-align: left;
+        }
+
+        td {
+            font-size: 17px;
+        }
+
+        .number {
+            width: 70px;
+            text-align: center;
+        }
+
+        .attendance {
+            width: 140px;
+            text-align: center;
+        }
+
+        .edit {
+            width: 90px;
+            text-align: center;
+        }
+
+        .delete {
+            width: 90px;
+            text-align: center;
+        }
+
+        .attendance-btn {
+            display: inline-block;
+            padding: 9px 18px;
+            border: 1px solid #087ff5;
+            color: #087ff5;
+            background: white;
+            border-radius: 4px;
+            text-decoration: none;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .edit-btn {
+            background: #087ff5;
+            color: white;
+            padding: 10px 13px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .delete-btn {
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            background: white;
+            padding: 9px 13px;
+            border-radius: 4px;
+            font-size: 19px;
+        }
+
+        .back {
+            margin: 25px 32px;
+            display: inline-block;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 9px 15px;
+            border-radius: 4px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div class="month-title">
+
+    {{ month_name }} {{ year }}
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th class="number">
+                #
+            </th>
+
+            <th>
+                Mövzu
+            </th>
+
+            <th>
+                Başlama tarixi
+            </th>
+
+            <th>
+                Bitmə tarixi
+            </th>
+
+            <th class="attendance">
+                Yoxlama
+            </th>
+
+            <th class="edit">
+                Redaktə
+            </th>
+
+            <th class="delete">
+                Sil
+            </th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+        {% for lesson in lessons %}
+
+        <tr>
+
+            <td class="number">
+                {{ forloop.counter }}
+            </td>
+
+            <td>
+                {{ lesson.topic }}
+            </td>
+
+            <td>
+                {{ lesson.start_date|date:"d.m.Y H:i" }}
+            </td>
+
+            <td>
+                {{ lesson.end_date|date:"d.m.Y H:i" }}
+            </td>
+
+            <td class="attendance">
+
+                <a
+                    href="{% url 'lesson_detail' lesson.id %}"
+                    class="attendance-btn"
+                >
+                    İştirak<br>
+                    cədvəli
+                </a>
+
+            </td>
+
+            <td class="edit">
+
+                <a href="#" class="edit-btn">
+                    ✎
+                </a>
+
+            </td>
+
+            <td class="delete">
+
+                <button class="delete-btn">
+                    🗑
+                </button>
+
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="7">
+                Bu ay üçün dərs yoxdur.
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
+
+<a
+    href="{% url 'group_detail' course.id %}"
+    class="back"
+>
+    ← &nbsp; Geri
+</a>
+
+
+</body>
+
+</html>

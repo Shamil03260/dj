@@ -8,118 +8,38 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>{{ lesson.topic }} - Dərs</title>
+    <title>Dərs iştirakı</title>
+
 
     <style>
 
         * {
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
-            background-color: #f8f9fa;
-            color: #333;
-            padding: 20px;
             margin: 0;
+            padding: 28px 44px;
+            background: #f4f6f9;
+            font-family: Arial, sans-serif;
+            color: #212529;
         }
 
         .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
         }
 
-        /* TOP HEADER */
-
-        .top-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
+        h1 {
+            margin: 0 0 28px;
+            font-size: 28px;
+            font-weight: 400;
         }
 
-        .lesson-info {
-            font-size: 14px;
-            color: #333;
-        }
-
-        .lesson-info strong {
-            font-size: 18px;
-            color: #212529;
-        }
-
-        .btn-geri {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            text-decoration: none;
-        }
-
-        .btn-geri:hover {
-            background-color: #5a6268;
-        }
-
-        /* LESSON INFO */
-
-        .lesson-card {
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
-        .lesson-title {
-            font-size: 22px;
-            font-weight: normal;
-            margin-top: 0;
+        .course {
             margin-bottom: 20px;
-            color: #212529;
-        }
-
-        .lesson-details {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .info-box {
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            padding: 15px;
-            min-width: 200px;
-        }
-
-        .info-label {
-            font-size: 13px;
-            color: #777;
-            margin-bottom: 7px;
-        }
-
-        .info-value {
-            font-size: 15px;
-            color: #212529;
-        }
-
-        /* STUDENTS */
-
-        h2 {
-            font-size: 22px;
-            font-weight: normal;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            color: #212529;
-        }
-
-        .table-container {
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            margin-bottom: 30px;
+            font-size: 16px;
         }
 
         table {
@@ -129,69 +49,63 @@
 
         th,
         td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #e0e0e0;
+            border: 1px solid #dee2e6;
+            padding: 16px 13px;
         }
 
         th {
-            font-weight: bold;
-            color: #000;
+            text-align: left;
         }
 
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        .student-number {
-            width: 70px;
-            color: #777;
+        th:last-child,
+        td:last-child {
+            width: 120px;
+            text-align: center;
         }
 
         .student-name {
-            color: #212529;
+            font-size: 16px;
         }
 
-        .student-id {
-            color: #777;
-            font-size: 13px;
+        .left-student {
+            background: #f5f5f5;
         }
 
-        .empty {
-            color: #777;
-            padding: 20px;
+        .left-label {
+            float: right;
+            background: #6c757d;
+            color: white;
+            padding: 4px 7px;
+            border-radius: 5px;
+            font-size: 12px;
         }
 
-        /* RESPONSIVE */
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
 
-        @media (max-width: 700px) {
+        .buttons {
+            margin-top: 32px;
+            display: flex;
+            gap: 12px;
+        }
 
-            body {
-                padding: 10px;
-            }
+        .back {
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 11px 16px;
+            border-radius: 5px;
+        }
 
-            .container {
-                padding: 15px;
-            }
-
-            .top-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-
-            .lesson-details {
-                flex-direction: column;
-            }
-
-            .info-box {
-                width: 100%;
-            }
-
-            table {
-                font-size: 14px;
-            }
-
+        .save {
+            border: none;
+            background: #087ff5;
+            color: white;
+            padding: 11px 16px;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
     </style>
@@ -201,91 +115,25 @@
 
 <body>
 
+
 <div class="container">
 
-    <!-- TOP HEADER -->
+    <h1>
+        Dərs iştirakı: {{ lesson.topic }}
+    </h1>
 
-    <div class="top-header">
 
-        <div class="lesson-info">
+    <div class="course">
 
-            Dərs:
-
-            <strong>
-                {{ lesson.topic }}
-            </strong>
-
-        </div>
-
-        <a href="javascript:history.back()"
-           class="btn-geri">
-
-            &#8592; Geri
-
-        </a>
+        Qrup: {{ course.name }}
 
     </div>
 
 
-    <!-- LESSON INFORMATION -->
+    <form method="POST">
 
-    <div class="lesson-card">
+        {% csrf_token %}
 
-        <h1 class="lesson-title">
-            {{ lesson.topic }}
-        </h1>
-
-
-        <div class="lesson-details">
-
-            <div class="info-box">
-
-                <div class="info-label">
-                    Başlanğıc tarixi
-                </div>
-
-                <div class="info-value">
-                    {{ lesson.start_date }}
-                </div>
-
-            </div>
-
-
-            <div class="info-box">
-
-                <div class="info-label">
-                    Bitmə tarixi
-                </div>
-
-                <div class="info-value">
-                    {{ lesson.end_date }}
-                </div>
-
-            </div>
-
-
-            <div class="info-box">
-
-                <div class="info-label">
-                    Müəllim
-                </div>
-
-                <div class="info-value">
-                    {{ teacher.full_name }}
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- STUDENTS -->
-
-    <h2>Tələbələr</h2>
-
-    <div class="table-container">
 
         <table>
 
@@ -293,16 +141,18 @@
 
                 <tr>
 
-                    <th class="student-number">
-                        #
+                    <th>
+                        Tələbə
                     </th>
 
                     <th>
-                        Tələbənin S.A.A
-                    </th>
+                        İştirak
 
-                    <th>
-                        Tələbə ID
+                        <input
+                            type="checkbox"
+                            id="selectAll"
+                        >
+
                     </th>
 
                 </tr>
@@ -312,20 +162,45 @@
 
             <tbody>
 
-                {% for student in students %}
+                {% for row in student_rows %}
 
-                <tr>
-
-                    <td class="student-number">
-                        {{ forloop.counter }}
-                    </td>
+                <tr
+                    {% if row.student.left_group_date %}
+                        class="left-student"
+                    {% endif %}
+                >
 
                     <td class="student-name">
-                        {{ student.name }}
+
+                        {{ row.student.name }}
+
+
+                        {% if row.student.left_group_date %}
+
+                            <span class="left-label">
+
+                                Qrupdan çıxıb:
+                                {{ row.student.left_group_date|date:"d.m.Y" }}
+
+                            </span>
+
+                        {% endif %}
+
                     </td>
 
-                    <td class="student-id">
-                        {{ student.id }}
+
+                    <td>
+
+                        <input
+                            type="checkbox"
+                            name="student_{{ row.student.id }}"
+                            class="student-checkbox"
+
+                            {% if row.is_present %}
+                                checked
+                            {% endif %}
+                        >
+
                     </td>
 
                 </tr>
@@ -334,8 +209,8 @@
 
                 <tr>
 
-                    <td colspan="3" class="empty">
-                        Bu qrupda hələ tələbə yoxdur.
+                    <td colspan="2">
+                        Bu qrupda tələbə yoxdur.
                     </td>
 
                 </tr>
@@ -346,11 +221,60 @@
 
         </table>
 
-    </div>
+
+        <div class="buttons">
+
+            <a
+                href="{% url 'month_lessons' course.id lesson.start_date.year lesson.start_date.month %}"
+                class="back"
+            >
+                ← &nbsp; Geri
+            </a>
+
+
+            <button
+                type="submit"
+                class="save"
+            >
+                Yadda Saxla
+            </button>
+
+        </div>
+
+
+    </form>
 
 </div>
+
+
+<script>
+
+    const selectAll =
+        document.getElementById("selectAll");
+
+    const checkboxes =
+        document.querySelectorAll(".student-checkbox");
+
+
+    selectAll.addEventListener(
+        "change",
+        function() {
+
+            checkboxes.forEach(
+                function(checkbox) {
+
+                    checkbox.checked =
+                        selectAll.checked;
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
 
 </body>
 
 </html>
-

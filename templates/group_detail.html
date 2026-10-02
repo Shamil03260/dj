@@ -1,395 +1,319 @@
 <!DOCTYPE html>
 <html lang="az">
+
 <head>
-  <meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-  <title>{{ course.name }} - Qrup</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-  <style>
+    <title>{{ course.name }}</title>
 
-    * {
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+    <style>
 
-    body {
-      background-color: #f8f9fa;
-      color: #333;
-      padding: 20px;
-      margin: 0;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      background-color: #fff;
-      padding: 20px;
-    }
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #212529;
+        }
 
-    /* Top Bar */
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 7px;
+        }
 
-    .top-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+        .group-info {
+            font-size: 14px;
+        }
 
-    .group-info {
-      font-size: 14px;
-      color: #333;
-    }
+        .back {
+            background: #6c757d;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
 
-    .btn-geri {
-      background-color: #6c757d;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    .btn-geri:hover {
-      background-color: #5a6268;
-    }
+        th,
+        td {
+            border: 1px solid #dee2e6;
+            padding: 14px 12px;
+            text-align: left;
+        }
 
-    /* Table */
+        th {
+            font-weight: bold;
+        }
 
-    .table-container {
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-      margin-bottom: 30px;
-    }
+        .score-area {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+        .score {
+            width: 95px;
+            padding: 7px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            text-align: center;
+        }
 
-    th,
-    td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid #e0e0e0;
-    }
+        .save-score {
+            background: #087ff5;
+            color: white;
+            border: none;
+            padding: 8px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-    th {
-      font-weight: bold;
-      color: #000;
-    }
+        h1 {
+            font-size: 28px;
+            font-weight: 400;
+            margin-top: 25px;
+        }
 
-    th:last-child,
-    td:last-child {
-      border-left: 1px solid #e0e0e0;
-      width: 250px;
-    }
+        .lesson-create {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
 
-    tr:last-child td {
-      border-bottom: none;
-    }
+        .lesson-create input {
+            padding: 9px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
 
-    .score-input-group {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
+        .topic {
+            flex: 1;
+        }
 
-    .score-input {
-      width: 100px;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      text-align: center;
-      font-size: 14px;
-    }
+        .date {
+            width: 193px;
+        }
 
-    .btn-save {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 13px;
-      line-height: 1.2;
-      text-align: center;
-    }
+        .create-btn {
+            background: #087ff5;
+            color: white;
+            border: none;
+            padding: 9px 12px;
+            border-radius: 4px;
+        }
 
-    .btn-save:hover {
-      background-color: #0069d9;
-    }
+        h2 {
+            font-size: 25px;
+            font-weight: 400;
+        }
 
-    /* Section Titles */
+        .months {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
 
-    h2 {
-      font-size: 22px;
-      font-weight: normal;
-      margin-top: 30px;
-      margin-bottom: 15px;
-      color: #212529;
-    }
+        .month {
+            border: 1px solid #e1e1e1;
+            padding: 20px 30px;
+            border-radius: 5px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+        }
 
-    /* Form */
+        .month a {
+            color: #087ff5;
+            text-decoration: none;
+            font-size: 16px;
+        }
 
-    .lesson-form {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 30px;
-    }
+    </style>
 
-    .form-input {
-      padding: 10px;
-      border: 1px solid #ced4da;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
-    .form-input.topic {
-      flex: 2;
-    }
-
-    .form-input.date {
-      flex: 1;
-    }
-
-    .btn-create {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-
-    .btn-create:hover {
-      background-color: #0069d9;
-    }
-
-    /* Cards */
-
-    .card {
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-      padding: 20px;
-      margin-bottom: 15px;
-      background-color: #fff;
-    }
-
-    .card-link {
-      color: #007bff;
-      text-decoration: none;
-      font-size: 15px;
-    }
-
-    .card-link:hover {
-      text-decoration: underline;
-    }
-
-    .empty {
-      color: #777;
-      padding: 10px 0;
-    }
-
-  </style>
 </head>
 
 <body>
 
-<div class="container">
-
-  <!-- TOP HEADER -->
-
-  <div class="top-header">
+<div class="top">
 
     <div class="group-info">
 
-      Qrup adı:
-      <strong>{{ course.name }}</strong>
+        Qrup adı: {{ course.name }}
+
+        /
+
+        Başlama tarixi:
+        {{ course.start_date|date:"Y-m-d" }}
+
+        /
+
+        Bitmə tarixi:
+        {{ course.end_date|date:"Y-m-d" }}
 
     </div>
 
-    <a
-      href="{% url 'group' %}"
-      class="btn-geri"
-    >
-      &#8592; Geri
+    <a href="{% url 'groups' %}" class="back">
+        ← &nbsp; Geri
     </a>
 
-  </div>
+</div>
 
 
-  <!-- STUDENTS -->
+<table>
 
-  <div class="table-container">
-
-    <table>
-
-      <thead>
+    <thead>
 
         <tr>
-          <th>Tələbənin S.A.A</th>
-          <th>İmtahan nəticəsi</th>
+
+            <th>
+                Tələbənin S.A.A
+            </th>
+
+            <th>
+                İmtahan nəticəsi
+            </th>
+
         </tr>
 
-      </thead>
+    </thead>
 
-      <tbody>
+    <tbody>
 
         {% for student in students %}
 
         <tr>
 
-          <td>
-            {{ student.name }}
-          </td>
+            <td>
+                {{ student.name }}
+            </td>
 
-          <td>
+            <td>
 
-            <form method="POST">
+                <form method="POST">
 
-              {% csrf_token %}
+                    {% csrf_token %}
 
-              <input
-                type="hidden"
-                name="student_id"
-                value="{{ student.id }}"
-              >
+                    <input type="hidden"
+                           name="student_id"
+                           value="{{ student.id }}">
 
-              <div class="score-input-group">
+                    <div class="score-area">
 
-                <input
-                  type="number"
-                  name="score"
-                  class="score-input"
-                  value="{{ student.score }}"
-                  min="0"
-                  max="100"
-                >
+                        <input
+                            type="number"
+                            class="score"
+                            value="{{ student.exam_score }}"
+                            min="0"
+                            max="100"
+                        >
 
-                <button
-                  type="submit"
-                  name="save_score"
-                  class="btn-save"
-                >
-                  Yadda<br>saxla
-                </button>
+                        <button
+                            type="button"
+                            class="save-score"
+                        >
+                            Yadda saxla
+                        </button>
 
-              </div>
+                    </div>
 
-            </form>
+                </form>
 
-          </td>
-
-        </tr>
-
-        {% empty %}
-
-        <tr>
-
-          <td colspan="2">
-            Bu qrupda hələ tələbə yoxdur.
-          </td>
+            </td>
 
         </tr>
 
         {% endfor %}
 
-      </tbody>
+    </tbody>
 
-    </table>
-
-  </div>
+</table>
 
 
-  <!-- DƏRSLƏR -->
+<h1>Dərslər</h1>
 
-  <h2>Dərslər</h2>
 
-  <form
-    method="POST"
-    class="lesson-form"
-  >
-
-    {% csrf_token %}
+<form class="lesson-create">
 
     <input
-      type="text"
-      name="topic"
-      class="form-input topic"
-      placeholder="Dərsin mövzusu"
-      required
+        class="topic"
+        type="text"
+        placeholder="Dərsin mövzusu"
     >
 
     <input
-      type="date"
-      name="start_date"
-      class="form-input date"
-      required
+        class="date"
+        type="date"
+        placeholder="Başlama tarixi"
     >
 
     <input
-      type="date"
-      name="end_date"
-      class="form-input date"
-      required
+        class="date"
+        type="date"
+        placeholder="Bitmə tarixi"
     >
 
-    <button
-      type="submit"
-      name="create_lesson"
-      class="btn-create"
-    >
-      Dərs yarat
+    <button class="create-btn">
+        Dərs yarat
     </button>
 
-  </form>
+</form>
 
 
-  <!-- MÖVCUD DƏRSLƏR -->
+<h2>Mövcud Dərslər</h2>
 
-  <h2>Mövcud Dərslər</h2>
 
-  {% for lesson in lessons %}
+<div class="months">
 
-    <div class="card">
+    {% regroup lessons by start_date.year as years %}
 
-      <a
-        href="{% url 'lesson_detail' lesson_id=lesson.id %}"
-        class="card-link"
-      >
-        {{ lesson.topic }}
-      </a>
+    {% for year_group in years %}
 
-      <div style="margin-top: 8px; font-size: 13px; color: #777;">
+        {% regroup year_group.list by start_date.month as months %}
 
-        {{ lesson.start_date }}
-        -
-        {{ lesson.end_date }}
+        {% for month_group in months %}
 
-      </div>
+        <div class="month">
 
-    </div>
+            <a href="{% url 'month_lessons' course.id year_group.grouper month_group.grouper %}">
 
-  {% empty %}
+                {% if month_group.grouper == 1 %}Yanvar
+                {% elif month_group.grouper == 2 %}Fevral
+                {% elif month_group.grouper == 3 %}Mart
+                {% elif month_group.grouper == 4 %}Aprel
+                {% elif month_group.grouper == 5 %}May
+                {% elif month_group.grouper == 6 %}İyun
+                {% elif month_group.grouper == 7 %}İyul
+                {% elif month_group.grouper == 8 %}Avqust
+                {% elif month_group.grouper == 9 %}Sentyabr
+                {% elif month_group.grouper == 10 %}Oktyabr
+                {% elif month_group.grouper == 11 %}Noyabr
+                {% elif month_group.grouper == 12 %}Dekabr
+                {% endif %}
 
-    <div class="empty">
-      Hələ heç bir dərs yaradılmayıb.
-    </div>
+                {{ year_group.grouper }}
 
-  {% endfor %}
+            </a>
 
+        </div>
+
+        {% endfor %}
+
+    {% endfor %}
 
 </div>
 
 </body>
+
 </html>

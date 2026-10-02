@@ -1,61 +1,85 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from . models import Student, courses, Teacher, Lesson
-from django.contrib.auth import authenticate, login
+
+from .models import Student, courses, Teacher, Lesson, LessonAttendance
+
 from django.contrib.auth.decorators import login_required
+
 
 @login_required(login_url="orientlogin")
 def home_page(request):
+
     teacher_id = request.session.get("teacher_id")
-    
+
     if not teacher_id:
         return redirect("orientlogin")
-    
-    teacher = Teacher.objects.get(id=teacher_id)
-    
+
+    teacher = get_object_or_404(
+        Teacher,
+        id=teacher_id
+    )
+
     context = {
-        "teacher":teacher
-        
+        "teacher": teacher
     }
-    
-    return render(request,"home_page.html", context)
+
+    return render(
+        request,
+        "home_page.html",
+        context
+    )
+
 
 def profile(request):
-    
+
     teacher_id = request.session.get("teacher_id")
-    
+
     if not teacher_id:
-        
         return redirect("orientlogin")
-    
-    teacher = Teacher.objects.get(id=teacher_id)
-    
+
+    teacher = get_object_or_404(
+        Teacher,
+        id=teacher_id
+    )
+
     context = {
-        "teacher":teacher
+        "teacher": teacher
     }
-    
-    return render(request, "profile.html", context)
+
+    return render(
+        request,
+        "profile.html",
+        context
+    )
 
 
 def groups(request):
-    
+
     teacher_id = request.session.get("teacher_id")
 
     if not teacher_id:
         return redirect("orientlogin")
 
-    teacher = Teacher.objects.get(id=teacher_id)
+    teacher = get_object_or_404(
+        Teacher,
+        id=teacher_id
+    )
 
-    teacher_courses = courses.objects.filter(
+    group_list = courses.objects.filter(
         teacher=teacher
     )
 
     context = {
         "teacher": teacher,
-        "courses": teacher_courses
+        "groups": group_list
     }
 
-    return render(request, "groups.html", context)
-    
+    return render(
+        request,
+        "groups.html",
+        context
+    )
+
+
 def group_detail(request, course_id):
 
     teacher_id = request.session.get("teacher_id")
@@ -76,55 +100,11 @@ def group_detail(request, course_id):
 
     students = Student.objects.filter(
         course=course
-    )
+    ).order_by("name")
 
     lessons = Lesson.objects.filter(
         course=course
-    ).order_by("-start_date")
-
-    if request.method == "POST":
-
-        # İmtahan nəticəsini yadda saxla
-        if "save_score" in request.POST:
-
-            student_id = request.POST.get("student_id")
-            score = request.POST.get("score")
-
-            student = get_object_or_404(
-                Student,
-                id=student_id,
-                course=course
-            )
-
-            if score:
-                student.score = score
-                student.save()
-
-            return redirect(
-                "group_detail",
-                course_id=course.id
-            )
-
-        # Yeni dərs yarat
-        if "create_lesson" in request.POST:
-
-            topic = request.POST.get("topic")
-            start_date = request.POST.get("start_date")
-            end_date = request.POST.get("end_date")
-
-            if topic and start_date and end_date:
-
-                Lesson.objects.create(
-                    topic=topic,
-                    start_date=start_date,
-                    end_date=end_date,
-                    course=course
-                )
-
-            return redirect(
-                "group_detail",
-                course_id=course.id
-            )
+    ).order_by("start_date")
 
     context = {
         "teacher": teacher,
@@ -132,8 +112,12 @@ def group_detail(request, course_id):
         "students": students,
         "lessons": lessons
     }
-    
-    return render(request, "group_detail.html", context)
+
+    return render(
+        request,
+        "group_detail.html",
+        context
+    )
 
 
 def login_dashboard(request):
@@ -149,6 +133,7 @@ def login_dashboard(request):
         ).first()
 
         if teacher:
+
             request.session["teacher_id"] = teacher.id
             request.session["teacher_name"] = teacher.full_name
 
@@ -156,13 +141,73 @@ def login_dashboard(request):
 
         else:
 
-            return render(request, "orient_login.html", {
-                "error": "İstifadəçi adı və ya parol yanlışdır."
-            })
+            return render(
+                request,
+                "orient_login.html",
+                {
+                    "error": "İstifadəçi adı və ya parol yanlışdır."
+                }
+            )
 
-    return render(request, "orient_login.html")
+    return render(
+        request,
+        "orient_login.html"
+    )
 
 
+def month_lessons(request, course_id, year, month):
+
+    teacher_id = request.session.get("teacher_id")
+
+    if not teacher_id:
+        return redirect("orientlogin")
+
+    teacher = get_object_or_404(
+        Teacher,
+        id=teacher_id
+    )
+
+    course = get_object_or_404(
+        courses,
+        id=course_id,
+        teacher=teacher
+    )
+
+    lessons = Lesson.objects.filter(
+        course=course,
+        start_date__year=year,
+        start_date__month=month
+    ).order_by("start_date")
+
+    month_names = {
+        1: "Yanvar",
+        2: "Fevral",
+        3: "Mart",
+        4: "Aprel",
+        5: "May",
+        6: "İyun",
+        7: "İyul",
+        8: "Avqust",
+        9: "Sentyabr",
+        10: "Oktyabr",
+        11: "Noyabr",
+        12: "Dekabr"
+    }
+
+    context = {
+        "teacher": teacher,
+        "course": course,
+        "lessons": lessons,
+        "year": year,
+        "month": month,
+        "month_name": month_names[month]
+    }
+
+    return render(
+        request,
+        "month_lessons.html",
+        context
+    )
 
 
 def lesson_detail(request, lesson_id):
@@ -172,17 +217,77 @@ def lesson_detail(request, lesson_id):
     if not teacher_id:
         return redirect("orientlogin")
 
-    teacher = Teacher.objects.get(id=teacher_id)
+    teacher = get_object_or_404(
+        Teacher,
+        id=teacher_id
+    )
 
-    lesson = get_object_or_404(Lesson, id=lesson_id)
-    
-    students = Student.objects.filter(course=lesson.course)
+    lesson = get_object_or_404(
+        Lesson,
+        id=lesson_id,
+        course__teacher=teacher
+    )
 
+    students = Student.objects.filter(
+        course=lesson.course
+    ).order_by("name")
+
+    # Davamiyyət göndərilibsə
+    if request.method == "POST":
+
+        for student in students:
+
+            checkbox_name = f"student_{student.id}"
+
+            is_present = checkbox_name in request.POST
+
+            LessonAttendance.objects.update_or_create(
+                lesson=lesson,
+                student=student,
+                defaults={
+                    "is_present": is_present
+                }
+            )
+
+        return redirect(
+            "lesson_detail",
+            lesson_id=lesson.id
+        )
+
+    # Mövcud davamiyyət məlumatlarını götürürük
+    attendance = LessonAttendance.objects.filter(
+        lesson=lesson
+    )
+
+    attendance_dict = {}
+
+    for item in attendance:
+
+        attendance_dict[item.student_id] = item.is_present
+
+    # HTML üçün student + davamiyyət məlumatı
+    student_rows = []
+
+    for student in students:
+
+        student_rows.append({
+            "student": student,
+            "is_present": attendance_dict.get(
+                student.id,
+                False
+            )
+        })
 
     context = {
         "teacher": teacher,
         "lesson": lesson,
-        "students":students
+        "course": lesson.course,
+        "student_rows": student_rows
     }
 
-    return render(request, "lesson_detail.html", context)
+    return render(
+        request,
+        "lesson_detail.html",
+        context
+    )
+
