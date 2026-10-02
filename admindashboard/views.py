@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
 from .models import Student, courses, Teacher, Lesson, LessonAttendance
-
 from django.contrib.auth.decorators import login_required
 
 
@@ -22,11 +20,7 @@ def home_page(request):
         "teacher": teacher
     }
 
-    return render(
-        request,
-        "home_page.html",
-        context
-    )
+    return render(request, "home_page.html", context)
 
 
 def profile(request):
@@ -45,11 +39,7 @@ def profile(request):
         "teacher": teacher
     }
 
-    return render(
-        request,
-        "profile.html",
-        context
-    )
+    return render(request, "profile.html", context)
 
 
 def groups(request):
@@ -73,11 +63,7 @@ def groups(request):
         "groups": group_list
     }
 
-    return render(
-        request,
-        "groups.html",
-        context
-    )
+    return render(request, "groups.html", context)
 
 
 def group_detail(request, course_id):
@@ -113,11 +99,7 @@ def group_detail(request, course_id):
         "lessons": lessons
     }
 
-    return render(
-        request,
-        "group_detail.html",
-        context
-    )
+    return render(request, "group_detail.html", context)
 
 
 def login_dashboard(request):
@@ -149,10 +131,7 @@ def login_dashboard(request):
                 }
             )
 
-    return render(
-        request,
-        "orient_login.html"
-    )
+    return render(request, "orient_login.html")
 
 
 def month_lessons(request, course_id, year, month):
@@ -203,11 +182,7 @@ def month_lessons(request, course_id, year, month):
         "month_name": month_names[month]
     }
 
-    return render(
-        request,
-        "month_lessons.html",
-        context
-    )
+    return render(request, "month_lessons.html", context)
 
 
 def lesson_detail(request, lesson_id):
@@ -232,7 +207,7 @@ def lesson_detail(request, lesson_id):
         course=lesson.course
     ).order_by("name")
 
-    # Davamiyyət göndərilibsə
+    
     if request.method == "POST":
 
         for student in students:
@@ -249,12 +224,8 @@ def lesson_detail(request, lesson_id):
                 }
             )
 
-        return redirect(
-            "lesson_detail",
-            lesson_id=lesson.id
-        )
+        return redirect("lesson_detail", lesson_id=lesson.id)
 
-    # Mövcud davamiyyət məlumatlarını götürürük
     attendance = LessonAttendance.objects.filter(
         lesson=lesson
     )
@@ -265,7 +236,6 @@ def lesson_detail(request, lesson_id):
 
         attendance_dict[item.student_id] = item.is_present
 
-    # HTML üçün student + davamiyyət məlumatı
     student_rows = []
 
     for student in students:
@@ -285,9 +255,5 @@ def lesson_detail(request, lesson_id):
         "student_rows": student_rows
     }
 
-    return render(
-        request,
-        "lesson_detail.html",
-        context
-    )
+    return render(request, "lesson_detail.html", context)
 
