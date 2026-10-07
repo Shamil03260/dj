@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #c9884f,
+                #43a669
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-box {
+            width: 545px;
+            background: white;
+
+            padding: 50px 45px;
+
+            border-radius: 5px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0 0 42px;
+
+            color: #283747;
+            font-size: 30px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            border: 1px solid #d1d7dc;
+            border-radius: 2px;
+
+            padding: 11px 13px;
+
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+
+            outline: none;
+
+            margin-bottom: 18px;
+        }
+
+        input {
+            height: 48px;
+        }
+
+        textarea {
+            height: 113px;
+            resize: both;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #4285d4;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 17px;
+        }
+
+        button {
+            width: 115px;
+            height: 51px;
+
+            border: none;
+            border-radius: 4px;
+
+            background-color: #2878d5;
+            color: white;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1769c5;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="contact-box">
+
+    <h1>Contact us</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            required
+        >
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+        >
+
+        <textarea
+            name="message"
+            placeholder="Message"
+            required
+        ></textarea>
+
+        <div class="button-container">
+            <button type="submit">
+                SEND
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

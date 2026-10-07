@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student, courses, Teacher, Lesson, LessonAttendance
 from django.contrib.auth.decorators import login_required
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 @login_required(login_url="orientlogin")
 def home_page(request):
@@ -257,3 +258,18 @@ def lesson_detail(request, lesson_id):
 
     return render(request, "lesson_detail.html", context)
 
+
+def contact_us(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+
+        send_mail(
+            f"Contact Us - {name}",
+            f"Name: {name}\nEmail: {email}\nMessage: {message}",
+            settings.EMAIL_HOST_USER,
+            ["shamilshirinof@gmail.com"],
+        )
+
+    return render(request, "contact_us.html")

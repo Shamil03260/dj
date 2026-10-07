@@ -10,4 +10,5 @@ urlpatterns = [
     path( "groups/lesson/<int:lesson_id>/", views.lesson_detail, name="lesson_detail"),
     path("lesson/<int:lesson_id>/", views.lesson_detail, name="lesson_detail"),
     path("groups/<int:course_id>/month/<int:year>/<int:month>/", views.month_lessons, name="month_lessons"),
+    path("contact-us/", views.contact_us, name="contact_us"),
     ]
