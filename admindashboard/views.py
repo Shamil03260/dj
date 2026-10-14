@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 
-@login_required(login_url="orientlogin")
+# @login_required(login_url="orientlogin")
 def home_page(request):
 
     teacher_id = request.session.get("teacher_id")
