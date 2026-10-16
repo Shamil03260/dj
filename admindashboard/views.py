@@ -456,5 +456,3 @@ def delete_monthlesson(request, lesson_id):
         month=lesson.start_date.month
     )
     
-    
-    
