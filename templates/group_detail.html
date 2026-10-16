@@ -1,46 +1,71 @@
 <!DOCTYPE html>
 <html lang="az">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>{{ course.name }}</title>
+    <title>{{ course.name }} - Qrup</title>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            padding: 20px;
+            padding: 30px;
             font-family: Arial, sans-serif;
-            background: white;
+            background-color: #f4f6f9;
             color: #212529;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         .top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 7px;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: white;
+            padding: 22px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         .group-info {
-            font-size: 14px;
+            line-height: 1.8;
+            font-size: 15px;
         }
 
-        .back {
-            background: #6c757d;
-            color: white;
-            padding: 7px 12px;
-            border-radius: 4px;
+        .btn-geri {
+            display: inline-block;
             text-decoration: none;
+            background: #1677d2;
+            color: white;
+            padding: 10px 17px;
+            border-radius: 6px;
+        }
+
+        .btn-geri:hover {
+            background: #105eaa;
+        }
+
+        .section {
+            background: white;
+            padding: 24px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        h2 {
+            font-size: 22px;
+            margin: 0 0 20px;
         }
 
         table {
@@ -48,272 +73,303 @@
             border-collapse: collapse;
         }
 
-        th,
-        td {
-            border: 1px solid #dee2e6;
-            padding: 14px 12px;
+        th, td {
+            padding: 13px;
             text-align: left;
+            border-bottom: 1px solid #e5e7eb;
         }
 
         th {
-            font-weight: bold;
+            background: #f1f5f9;
         }
 
-        .score-area {
+        .score-form {
             display: flex;
-            gap: 7px;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .score {
-            width: 95px;
-            padding: 7px;
+        .score-input {
+            width: 100px;
+            padding: 9px;
             border: 1px solid #ced4da;
-            border-radius: 4px;
-            text-align: center;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            padding: 10px 14px;
+            font-size: 14px;
         }
 
         .save-score {
-            background: #087ff5;
+            background: #198754;
             color: white;
-            border: none;
-            padding: 8px 10px;
-            border-radius: 4px;
-            cursor: pointer;
         }
 
-        h1 {
-            font-size: 28px;
-            font-weight: 400;
-            margin-top: 25px;
+        .save-score:hover {
+            background: #146c43;
         }
 
         .lesson-create {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 12px;
         }
 
         .lesson-create input {
-            padding: 9px;
+            min-width: 0;
+            width: 100%;
+            padding: 11px;
             border: 1px solid #ced4da;
-            border-radius: 4px;
-        }
-
-        .topic {
-            flex: 1;
-        }
-
-        .date {
-            width: 193px;
+            border-radius: 5px;
+            font-size: 14px;
         }
 
         .create-btn {
-            background: #087ff5;
+            background: #1677d2;
             color: white;
-            border: none;
-            padding: 9px 12px;
-            border-radius: 4px;
         }
 
-        h2 {
-            font-size: 25px;
-            font-weight: 400;
+        .create-btn:hover {
+            background: #105eaa;
         }
 
-        .months {
+        .error-message {
+            background: #f8d7da;
+            color: #842029;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .month-list {
             display: flex;
-            flex-direction: column;
-            gap: 14px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .month {
-            border: 1px solid #e1e1e1;
-            padding: 20px 30px;
-            border-radius: 5px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+            background: #eef5ff;
+            border: 1px solid #d4e5fb;
+            padding: 12px 18px;
+            border-radius: 7px;
         }
 
         .month a {
-            color: #087ff5;
+            color: #145da0;
             text-decoration: none;
-            font-size: 16px;
+            font-weight: bold;
         }
 
-    </style>
+        .month a:hover {
+            text-decoration: underline;
+        }
 
+        .empty-message {
+            color: #6c757d;
+            padding: 10px 0;
+        }
+
+        @media (max-width: 800px) {
+            body {
+                padding: 15px;
+            }
+
+            .lesson-create {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 16px;
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 440px;
+            }
+        }
+    </style>
 </head>
 
 <body>
+<div class="container">
 
-<div class="top">
+    <!-- Qrup məlumatları -->
+    <div class="top">
+        <div class="group-info">
+            <strong>Qrup adı:</strong> {{ course.name }}
+            <br>
 
-    <div class="group-info">
+            <strong>Başlama tarixi:</strong>
+            {% if course.start_date %}
+                {{ course.start_date|date:"Y-m-d" }}
+            {% else %}
+                Təyin edilməyib
+            {% endif %}
+            <br>
 
-        Qrup adı: {{ course.name }}
-
-        /
-
-        Başlama tarixi:
-        {{ course.start_date|date:"Y-m-d" }}
-
-        /
-
-        Bitmə tarixi:
-        {{ course.end_date|date:"Y-m-d" }}
-
-    </div>
-
-    <a href="{% url 'groups' %}" class="back">
-        ← &nbsp; Geri
-    </a>
-
-</div>
-
-
-<table>
-
-    <thead>
-
-        <tr>
-
-            <th>
-                Tələbənin S.A.A
-            </th>
-
-            <th>
-                İmtahan nəticəsi
-            </th>
-
-        </tr>
-
-    </thead>
-
-    <tbody>
-
-        {% for student in students %}
-
-        <tr>
-
-            <td>
-                {{ student.name }}
-            </td>
-
-            <td>
-
-                <form method="POST">
-
-                    {% csrf_token %}
-
-                    <input type="hidden"
-                           name="student_id"
-                           value="{{ student.id }}">
-
-                    <div class="score-area">
-
-                        <input
-                            type="number"
-                            class="score"
-                            value="{{ student.exam_score }}"
-                            min="0"
-                            max="100"
-                        >
-
-                        <button
-                            type="button"
-                            class="save-score"
-                        >
-                            Yadda saxla
-                        </button>
-
-                    </div>
-
-                </form>
-
-            </td>
-
-        </tr>
-
-        {% endfor %}
-
-    </tbody>
-
-</table>
-
-
-<h1>Dərslər</h1>
-
-
-<form class="lesson-create">
-
-    <input
-        class="topic"
-        type="text"
-        placeholder="Dərsin mövzusu"
-    >
-
-    <input
-        class="date"
-        type="date"
-        placeholder="Başlama tarixi"
-    >
-
-    <input
-        class="date"
-        type="date"
-        placeholder="Bitmə tarixi"
-    >
-
-    <button class="create-btn">
-        Dərs yarat
-    </button>
-
-</form>
-
-
-<h2>Mövcud Dərslər</h2>
-
-
-<div class="months">
-
-    {% regroup lessons by start_date.year as years %}
-
-    {% for year_group in years %}
-
-        {% regroup year_group.list by start_date.month as months %}
-
-        {% for month_group in months %}
-
-        <div class="month">
-
-            <a href="{% url 'month_lessons' course.id year_group.grouper month_group.grouper %}">
-
-                {% if month_group.grouper == 1 %}Yanvar
-                {% elif month_group.grouper == 2 %}Fevral
-                {% elif month_group.grouper == 3 %}Mart
-                {% elif month_group.grouper == 4 %}Aprel
-                {% elif month_group.grouper == 5 %}May
-                {% elif month_group.grouper == 6 %}İyun
-                {% elif month_group.grouper == 7 %}İyul
-                {% elif month_group.grouper == 8 %}Avqust
-                {% elif month_group.grouper == 9 %}Sentyabr
-                {% elif month_group.grouper == 10 %}Oktyabr
-                {% elif month_group.grouper == 11 %}Noyabr
-                {% elif month_group.grouper == 12 %}Dekabr
-                {% endif %}
-
-                {{ year_group.grouper }}
-
-            </a>
-
+            <strong>Bitmə tarixi:</strong>
+            {% if course.end_date %}
+                {{ course.end_date|date:"Y-m-d" }}
+            {% else %}
+                Təyin edilməyib
+            {% endif %}
         </div>
 
-        {% endfor %}
+        <a href="{% url 'groups' %}" class="btn-geri">
+            ← Geri
+        </a>
+    </div>
 
-    {% endfor %}
+    <!-- Tələbələrin imtahan nəticələri -->
+    <div class="section">
+        <h2>Tələbələrin imtahan nəticələri</h2>
+
+        {% if score_error %}
+            <div class="error-message">
+                {{ score_error }}
+            </div>
+        {% endif %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tələbənin S.A.A</th>
+                    <th>İmtahan nəticəsi</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.name }}</td>
+
+                    <td>
+                        <form method="POST" class="score-form">
+                            {% csrf_token %}
+
+                            <input
+                                type="hidden"
+                                name="student_id"
+                                value="{{ student.id }}"
+                            >
+
+                            <input
+                                type="number"
+                                name="exam_score"
+                                class="score-input"
+                                value="{{ student.exam_score }}"
+                                min="0"
+                                max="100"
+                                required
+                                aria-label="{{ student.name }} üçün imtahan balı"
+                            >
+
+                            <button
+                                type="submit"
+                                name="save_score"
+                                value="1"
+                                class="save-score"
+                            >
+                                Yadda saxla
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">
+                        Bu qrupda tələbə yoxdur.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Yeni dərs yaratmaq -->
+    <div class="section">
+        <h2>Dərs yarat</h2>
+
+        {% if lesson_error %}
+            <div class="error-message">
+                {{ lesson_error }}
+            </div>
+        {% endif %}
+
+        <form method="POST" class="lesson-create">
+            {% csrf_token %}
+
+            <input
+                type="text"
+                name="topic"
+                placeholder="Dərsin mövzusu"
+                required
+            >
+
+            <input
+                type="datetime-local"
+                name="start_date"
+                aria-label="Başlama vaxtı"
+                required
+            >
+
+            <input
+                type="datetime-local"
+                name="end_date"
+                aria-label="Bitmə vaxtı"
+                required
+            >
+
+            <button type="submit" class="create-btn">
+                Dərs yarat
+            </button>
+        </form>
+    </div>
+
+    <!-- Mövcud dərslər -->
+    <div class="section">
+        <h2>Mövcud Dərslər</h2>
+
+        <div class="month-list">
+            {% regroup lessons by start_date.year as years %}
+
+            {% for year_group in years %}
+                {% regroup year_group.list by start_date.month as months %}
+
+                {% for month_group in months %}
+                    <div class="month">
+                        <a href="{% url 'month_lessons' course.id year_group.grouper month_group.grouper %}">
+                            {% if month_group.grouper == 1 %}Yanvar
+                            {% elif month_group.grouper == 2 %}Fevral
+                            {% elif month_group.grouper == 3 %}Mart
+                            {% elif month_group.grouper == 4 %}Aprel
+                            {% elif month_group.grouper == 5 %}May
+                            {% elif month_group.grouper == 6 %}İyun
+                            {% elif month_group.grouper == 7 %}İyul
+                            {% elif month_group.grouper == 8 %}Avqust
+                            {% elif month_group.grouper == 9 %}Sentyabr
+                            {% elif month_group.grouper == 10 %}Oktyabr
+                            {% elif month_group.grouper == 11 %}Noyabr
+                            {% elif month_group.grouper == 12 %}Dekabr
+                            {% endif %}
+                            {{ year_group.grouper }}
+                        </a>
+                    </div>
+                {% endfor %}
+            {% empty %}
+                <div class="empty-message">
+                    Hələ heç bir dərs yaradılmayıb.
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 </div>
-
 </body>
-
 </html>

@@ -205,7 +205,7 @@
 
             <td class="edit">
 
-                <a href="#" class="bi bi-pencil-square">
+                <a href="{% url 'edit_monthlesson' lesson.id %}" class="bi bi-pencil-square">
                     
                 </a>
 
@@ -213,7 +213,21 @@
 
             <td class="delete">
 
-                <a href="" class="bi bi-trash-fill"></a>
+                <form method="POST"
+                    action="{% url 'delete_monthlesson' lesson.id %}"
+                    style="display: inline;">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="bi bi-trash3-fill"
+                            style="border: none;
+                                background: none;
+                                color: red;
+                                cursor: pointer;">
+                    </button>
+
+                </form>
 
             </td>
 
