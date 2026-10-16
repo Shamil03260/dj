@@ -1,341 +1,499 @@
+
 <!DOCTYPE html>
 <html lang="az">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ORIENT ACADEMY - Qruplar</title>
 
-    <!-- Bootstrap 5 -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    >
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
 
     <style>
-
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-            color: #212529;
-            font-size: 15px;
+            font-family: "Open Sans", Arial, sans-serif;
+            background: #f4f6f9;
+            color: #343a40;
+            font-size: 14px;
         }
 
-        /* =========================
-           SIDEBAR
-        ========================= */
+        /* SIDEBAR */
 
         .sidebar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 214px;
+            width: 240px;
             height: 100vh;
-            background-color: #343a40;
-            color: white;
+            background: #343a40;
+            color: #fff;
+            z-index: 100;
         }
 
-        /* LOGO */
-
         .logo {
-            height: 42px;
+            height: 65px;
             display: flex;
             align-items: center;
-            padding-left: 15px;
+            padding: 0 20px;
             border-bottom: 1px solid #4b5258;
+            gap: 11px;
         }
 
         .logo-icon {
-            width: 28px;
-            height: 28px;
+            width: 35px;
+            height: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background-color: #eeeeee;
-            color: #343a40;
-            font-size: 16px;
-            font-weight: bold;
-            margin-right: 8px;
+            border-radius: 8px;
+            background: #0d6efd;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 700;
         }
 
         .logo-text {
-            font-size: 15px;
-            color: #d7d7d7;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
         }
 
-        /* PROFILE */
-
         .profile {
-            height: 58px;
             display: flex;
             align-items: center;
-            padding: 0 15px;
+            gap: 12px;
+            min-height: 82px;
+            padding: 16px 20px;
             border-bottom: 1px solid #4b5258;
         }
 
         .profile-icon {
-            width: 30px;
-            height: 30px;
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background-color: white;
-            color: #aaa;
-            margin-right: 10px;
+            background: #495057;
+            color: #fff;
+            font-size: 15px;
         }
 
         .profile-name {
-            font-size: 14px;
-            color: #ddd;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
         }
 
-        /* MENU */
-
-        .menu {
-            padding-top: 12px;
+        .menu-heading {
+            padding: 24px 20px 10px;
+            color: #adb5bd;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         .menu a {
-            display: block;
-            padding: 11px 20px;
-            color: #d9d9d9;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            border-left: 4px solid transparent;
+            color: #d9dfe4;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
+            transition: 0.2s;
         }
 
-        .menu a:hover {
-            background-color: #3e454b;
+        .menu a i {
+            width: 18px;
+            text-align: center;
+            font-size: 15px;
         }
 
-        .menu i {
-            width: 20px;
-            margin-right: 5px;
+        .menu a:hover,
+        .menu a.active {
+            background: #454d55;
+            border-left-color: #0d6efd;
+            color: #fff;
         }
 
-        /* =========================
-           MAIN
-        ========================= */
+        /* MAIN */
 
         .main {
-            margin-left: 214px;
+            margin-left: 240px;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* TOPBAR */
 
         .topbar {
-            height: 42px;
+            height: 65px;
             display: flex;
             align-items: center;
-            padding: 0 20px;
-            background-color: white;
-            border-bottom: 1px solid #ddd;
+            justify-content: space-between;
+            padding: 0 28px;
+            background: #fff;
+            border-bottom: 1px solid #e9ecef;
         }
 
         .hamburger {
-            color: #777;
-            font-size: 17px;
+            border: none;
+            background: transparent;
+            color: #6c757d;
+            font-size: 18px;
         }
 
         .topbar-right {
-            margin-left: auto;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
         }
 
-        .home-button {
-            color: #777;
-            font-size: 14px;
+        .home-button,
+        .logout {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #6c757d;
             text-decoration: none;
+            font-size: 13px;
         }
 
         .home-button:hover {
-            color: #555;
-        }
-
-        .logout {
-            color: #888;
-            font-size: 14px;
-            text-decoration: none;
+            color: #0d6efd;
         }
 
         .logout:hover {
-            color: #555;
+            color: #dc3545;
         }
 
-        /* =========================
-           CONTENT
-        ========================= */
+        /* CONTENT */
 
         .content {
-            padding: 15px;
+            flex: 1;
+            padding: 30px;
+            padding-bottom: 75px;
         }
 
         .page-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
         }
 
         .page-title {
-            font-size: 26px;
-            font-weight: 400;
+            margin: 0;
+            font-size: 25px;
+            font-weight: 700;
+            color: #343a40;
+        }
+
+        .page-subtitle {
+            margin-top: 7px;
+            color: #7a838c;
+            font-size: 13px;
         }
 
         .breadcrumb {
             margin: 0;
-            font-size: 14px;
+            padding: 0;
+            background: transparent;
+            font-size: 13px;
         }
 
         .breadcrumb a {
-            color: #007bff;
+            color: #0d6efd;
             text-decoration: none;
         }
 
-        /* =========================
-           GROUPS
-        ========================= */
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* GROUPS PANEL */
 
         .groups-box {
-            min-height: 325px;
-            padding: 42px 20px 55px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            padding: 25px;
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px rgba(33, 37, 41, 0.035);
+        }
+
+        .groups-box-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
         }
 
         .groups-title {
-            margin-bottom: 15px;
-            font-size: 22px;
-            font-weight: 400;
+            margin: 0;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .groups-count-label {
+            padding: 6px 11px;
+            border-radius: 20px;
+            background: #e7f1ff;
+            color: #0d6efd;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .groups-list {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 20px;
         }
 
         /* GROUP CARD */
 
         .group-card {
-            width: 156px;
-            height: 190px;
+            min-width: 0;
+            min-height: 205px;
             display: flex;
             flex-direction: column;
-            padding: 18px 17px 10px;
-            background-color: #28a745;
-            border-radius: 4px;
-            color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #e4e8ed;
+            border-radius: 9px;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .group-card:hover {
+            transform: translateY(-3px);
+            border-color: #b6d4fe;
+            box-shadow: 0 7px 20px rgba(13, 110, 253, 0.09);
+        }
+
+        .group-icon {
+            width: 43px;
+            height: 43px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            border-radius: 10px;
+            background: #e7f1ff;
+            color: #0d6efd;
+            font-size: 18px;
         }
 
         .group-name {
+            margin-bottom: 13px;
             font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 3px;
+            font-weight: 700;
+            color: #343a40;
+            overflow-wrap: anywhere;
         }
 
         .student-count {
-            font-size: 14px;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            color: #7a838c;
+            font-size: 12px;
         }
 
-        /* DETAILS BUTTON */
+        .student-count i {
+            color: #0d6efd;
+        }
 
         .details-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             width: 100%;
             margin-top: auto;
-            padding: 7px;
-            border: none;
-            border-radius: 3px;
-            background-color: white;
-            color: #555;
-            font-size: 13px;
+            padding: 10px 12px;
+            border: 1px solid #0d6efd;
+            border-radius: 6px;
+            background: #0d6efd;
+            color: #fff;
             text-align: center;
             text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: 0.2s;
         }
 
         .details-button:hover {
-            background-color: #eeeeee;
-            color: #333;
+            background: #0b5ed7;
+            border-color: #0b5ed7;
+            color: #fff;
         }
 
-        /* EMPTY */
+        /* EMPTY STATE */
 
         .empty-message {
-            color: #777;
-            font-size: 15px;
-            padding-top: 10px;
+            padding: 45px 15px;
+            text-align: center;
+            color: #7a838c;
         }
 
-        /* =========================
-           FOOTER
-        ========================= */
+        .empty-message i {
+            display: block;
+            margin-bottom: 15px;
+            color: #adb5bd;
+            font-size: 35px;
+        }
+
+        .empty-message p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
 
         .footer {
-            position: fixed;
-            left: 214px;
-            right: 0;
-            bottom: 0;
-            height: 42px;
+            min-height: 50px;
             display: flex;
             align-items: center;
-            padding-left: 14px;
-            background-color: white;
-            border-top: 1px solid #ddd;
-            color: #75879a;
-            font-size: 13px;
-            font-weight: bold;
+            padding: 12px 30px;
+            background: #fff;
+            border-top: 1px solid #e9ecef;
+            color: #7a838c;
+            font-size: 12px;
         }
 
-    </style>
+        /* RESPONSIVE */
 
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .content {
+                padding: 22px;
+                padding-bottom: 65px;
+            }
+
+            .groups-list {
+                grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar {
+                width: 65px;
+                overflow: hidden;
+            }
+
+            .logo {
+                justify-content: center;
+                padding: 0;
+            }
+
+            .logo-text,
+            .profile-name,
+            .menu-heading {
+                display: none;
+            }
+
+            .profile {
+                justify-content: center;
+                padding: 15px 0;
+            }
+
+            .menu a {
+                justify-content: center;
+                padding: 15px 0;
+                border-left-width: 3px;
+                font-size: 0;
+            }
+
+            .menu a i {
+                font-size: 17px;
+                margin: 0;
+            }
+
+            .main {
+                margin-left: 65px;
+            }
+
+            .topbar {
+                height: 58px;
+                padding: 0 14px;
+            }
+
+            .topbar-right {
+                gap: 12px;
+            }
+
+            .home-button,
+            .logout {
+                font-size: 12px;
+            }
+
+            .content {
+                padding: 18px 12px 65px;
+            }
+
+            .page-title {
+                font-size: 22px;
+            }
+
+            .groups-box {
+                padding: 18px 14px;
+            }
+
+            .groups-list {
+                grid-template-columns: 1fr;
+            }
+
+            .group-card {
+                min-height: 185px;
+            }
+
+            .footer {
+                padding: 12px;
+                font-size: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- =========================
-     SIDEBAR
-========================= -->
-
 <div class="sidebar">
 
-    <!-- LOGO -->
-
     <div class="logo">
-
-        <div class="logo-icon">
-            F
-        </div>
-
-        <div class="logo-text">
-            ORIENT ACADEMY
-        </div>
-
+        <div class="logo-icon">O</div>
+        <div class="logo-text">ORIENT ACADEMY</div>
     </div>
 
-
-    <!-- PROFILE -->
-
     <div class="profile">
-
         <div class="profile-icon">
             <i class="fa-solid fa-user"></i>
         </div>
@@ -343,15 +501,12 @@
         <div class="profile-name">
             {{ teacher.full_name }}
         </div>
-
     </div>
 
-
-    <!-- MENU -->
-
     <div class="menu">
+        <div class="menu-heading">ƏSAS MENYU</div>
 
-        <a href="{% url 'groups' %}">
+        <a href="{% url 'groups' %}" class="active">
             <i class="fa-solid fa-users"></i>
             QRUPLAR
         </a>
@@ -360,90 +515,62 @@
             <i class="fa-solid fa-building-columns"></i>
             HESABATLAR
         </a>
-
     </div>
 
 </div>
 
-
-<!-- =========================
-     MAIN
-========================= -->
-
 <div class="main">
-
-    <!-- TOPBAR -->
 
     <div class="topbar">
 
-        <div class="hamburger">
+        <button type="button" class="hamburger" aria-label="Menyu">
             <i class="fa-solid fa-bars"></i>
-        </div>
+        </button>
 
         <div class="topbar-right">
-
-            <!-- ƏSAS SƏHİFƏ -->
-
-            <a
-                href="{% url 'homepage' %}"
-                class="home-button"
-            >
+            <a href="{% url 'homepage' %}" class="home-button">
                 <i class="fa-solid fa-house"></i>
                 Əsas səhifə
             </a>
 
-
-            <!-- ÇIXIŞ -->
-
-            <a
-                href="{% url 'logout' %}"
-                class="logout"
-            >
+            <a href="{% url 'logout' %}" class="logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
                 Çıxış
             </a>
-
         </div>
 
     </div>
 
-
-    <!-- CONTENT -->
-
     <div class="content">
-
-        <!-- PAGE HEADER -->
 
         <div class="page-header">
 
-            <div class="page-title">
-                Qruplar
+            <div>
+                <h1 class="page-title">Qruplar</h1>
+                <div class="page-subtitle">
+                    Tədris qruplarınızı buradan idarə edə bilərsiniz.
+                </div>
             </div>
 
             <div class="breadcrumb">
-
-                <a href="{% url 'homepage' %}">
-                    Əsas səhifə
-                </a>
-
+                <a href="{% url 'homepage' %}">Əsas səhifə</a>
                 &nbsp; / &nbsp;
-
-                <span>
-                    Qruplar
-                </span>
-
+                <span>Qruplar</span>
             </div>
 
         </div>
 
-
-        <!-- GROUPS BOX -->
-
         <div class="groups-box">
 
-            <div class="groups-title">
-                Davam edən qruplar
-            </div>
+            <div class="groups-box-header">
+                <h2 class="groups-title">Davam edən qruplar</h2>
 
+                {% if groups %}
+                    <span class="groups-count-label">
+                        {{ groups|length }} qrup
+                    </span>
+                {% endif %}
+            </div>
 
             {% if groups %}
 
@@ -453,31 +580,23 @@
 
                         <div class="group-card">
 
-                            <!-- QRUP ADI -->
+                            <div class="group-icon">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
 
                             <div class="group-name">
                                 {{ course.name }}
                             </div>
 
-
-                            <!-- TƏLƏBƏ SAYI -->
-
                             <div class="student-count">
-
-                                Tələbə sayı:
-
-                                {{ course.students.count }}
-
+                                <i class="fa-solid fa-user-graduate"></i>
+                                Tələbə sayı: {{ course.students.count }}
                             </div>
 
-
-                            <!-- ƏTRAFLI -->
-
-                            <a
-                                href="{% url 'group_detail' course.id %}"
-                                class="details-button"
-                            >
+                            <a href="{% url 'group_detail' course.id %}"
+                               class="details-button">
                                 Ətraflı
+                                <i class="fa-solid fa-arrow-right"></i>
                             </a>
 
                         </div>
@@ -489,7 +608,8 @@
             {% else %}
 
                 <div class="empty-message">
-                    Hazırda heç bir qrupunuz yoxdur.
+                    <i class="fa-regular fa-folder-open"></i>
+                    <p>Hazırda heç bir qrupunuz yoxdur.</p>
                 </div>
 
             {% endif %}
@@ -498,20 +618,11 @@
 
     </div>
 
-</div>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<div class="footer">
-
-    Copyright © {% now "Y-m-d" %} Orient Academy.
+    <footer class="footer">
+        Copyright © {% now "Y-m-d" %} Orient Academy.
+    </footer>
 
 </div>
-
 
 </body>
-
 </html>

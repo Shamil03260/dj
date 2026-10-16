@@ -8,7 +8,7 @@ from django.utils import timezone
 
 
 
-# @login_required(login_url="orientlogin")
+@login_required(login_url="orientlogin")
 def home_page(request):
 
     teacher_id = request.session.get("teacher_id")
@@ -188,36 +188,35 @@ def group_detail(request, course_id):
 
 
 def login_dashboard(request):
+    print("LOGIN VIEW AÇILDI")
+    print("Method:", request.method)
 
     if request.method == "POST":
+        full_name = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "")
 
-        full_name = request.POST.get("username")
-        password = request.POST.get("password")
+        print("Username daxil edilib:", bool(full_name))
+        print("Password daxil edilib:", bool(password))
 
         teacher = Teacher.objects.filter(
-            full_name=full_name,
+            full_name__iexact=full_name,
             password=password
         ).first()
 
         if teacher:
-
             request.session["teacher_id"] = teacher.id
             request.session["teacher_name"] = teacher.full_name
 
+            print("LOGIN UĞURLUDUR")
             return redirect("homepage")
 
-        else:
+        print("MÜƏLLİM TAPILMADI")
 
-            return render(
-                request,
-                "orient_login.html",
-                {
-                    "error": "İstifadəçi adı və ya parol yanlışdır."
-                }
-            )
+        return render(request, "orient_login.html", {
+            "error": "İstifadəçi adı və ya parol yanlışdır."
+        })
 
     return render(request, "orient_login.html")
-
 
 def month_lessons(request, course_id, year, month):
 

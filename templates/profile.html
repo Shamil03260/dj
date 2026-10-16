@@ -1,872 +1,682 @@
+
 <!DOCTYPE html>
 <html lang="az">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ORIENT ACADEMY - Profile / info</title>
+    <title>ORIENT ACADEMY - Profil</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
-    <!-- Bootstrap 5 CSS -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          rel="stylesheet">
 
-
-    <!-- FontAwesome Icons -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-
-    <!-- Google Font: Open Sans -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Open Sans", sans-serif;
+            background: #f4f6f9;
+            color: #343a40;
+        }
 
         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: #f4f6f9;
-        }
-
-
-        /* Sidebar */
-
-        #sidebar {
-            width: 250px;
             min-height: 100vh;
-            background-color: #343a40;
-            transition: margin-left 0.3s ease-in-out;
-            z-index: 1000;
         }
 
-        #sidebar.collapsed {
-            margin-left: -250px;
+        /* Əsas düzülüş */
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
         }
 
+        /* Sol menyu */
 
-        /* User section */
+        .sidebar {
+            width: 250px;
+            min-width: 250px;
+            min-height: 100vh;
+            background: #343a40;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            transition: width 0.25s ease, min-width 0.25s ease;
+            overflow: hidden;
+        }
 
-        .sidebar-user {
-            padding: 1.25rem 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        .sidebar-brand {
+            height: 70px;
+            min-height: 70px;
             display: flex;
             align-items: center;
             gap: 12px;
-            background-color: #2f353a;
+            padding: 0 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
         }
 
-
-        .user-avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background-color: #e9ecef;
-            color: #6c757d;
-
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 9px;
+            background: #0d6efd;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            font-size: 20px;
-            flex-shrink: 0;
+            font-size: 19px;
+            font-weight: 700;
+            color: white;
         }
 
-
-        .teacher-name {
-            color: #ffffff;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-
-            transition: color 0.2s ease;
-        }
-
-        .teacher-name:hover {
-            color: #adb5bd;
-        }
-
-
-        /* Sidebar navigation */
-
-        .sidebar-nav .nav-link {
-            color: #c2c7d0;
-
-            padding: 12px 16px;
-
-            font-size: 13px;
-            font-weight: 600;
-
+        .brand-name {
+            font-size: 15px;
+            font-weight: 700;
             letter-spacing: 0.5px;
+        }
 
+        .sidebar-user {
+            padding: 22px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-wrap: anywhere;
+        }
+
+        .user-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #495057;
             display: flex;
             align-items: center;
-
-            gap: 12px;
-
-            transition: all 0.2s ease-in-out;
-
-            text-transform: uppercase;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 20px;
         }
 
-
-        .sidebar-nav .nav-link:hover {
-            color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.08);
+        .sidebar-user a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
         }
 
+        .sidebar-user a:hover {
+            color: #8bb9fe;
+        }
 
-        .sidebar-nav .nav-link i {
-            width: 20px;
+        .sidebar-label {
+            padding: 22px 20px 8px;
+            color: #adb5bd;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 13px 20px;
+            color: #dee2e6;
+            text-decoration: none;
+            font-size: 14px;
+            white-space: nowrap;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-link i {
+            width: 18px;
             text-align: center;
-            font-size: 15px;
         }
 
-
-        /* Top Navbar */
-
-        .top-navbar {
-            height: 50px;
-
-            background-color: #ffffff;
-
-            border-bottom: 1px solid #dee2e6;
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            background: #495057;
+            color: #fff;
+            border-left-color: #0d6efd;
         }
 
+        /* Sağ tərəfin əsas hissəsi */
 
-        /* Main layout */
-
-        .main-wrapper {
+        .main {
             flex: 1;
-
+            min-width: 0;
             display: flex;
             flex-direction: column;
+        }
 
+        /* Yuxarı panel */
+
+        .topbar {
+            height: 70px;
+            min-height: 70px;
+            width: 100%;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 28px;
+            gap: 15px;
+        }
+
+        .menu-button {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #dee2e6;
+            background: #fff;
+            border-radius: 7px;
+            color: #343a40;
+            cursor: pointer;
+        }
+
+        .menu-button:hover {
+            background: #f1f3f5;
+        }
+
+        .logout-button {
+            padding: 9px 14px;
+            background: #dc3545;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .logout-button:hover {
+            background: #bb2d3b;
+            color: #fff;
+        }
+
+        /* Səhifənin məzmunu */
+
+        .page-content {
+            width: 100%;
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 30px;
+            flex: 1;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            margin: 0 0 7px;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .page-heading p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        /* Kartlar */
+
+        .profile-card {
+            width: 100%;
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+
+        .card-heading {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .card-heading h2 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .card-heading p {
+            margin: 6px 0 0;
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        .card-body {
+            padding: 26px 24px;
+        }
+
+        /* Avatar */
+
+        .profile-avatar {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 28px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .avatar-circle {
+            width: 82px;
+            height: 82px;
+            min-width: 82px;
+            border-radius: 50%;
+            background: #e7f1ff;
+            color: #0d6efd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .avatar-info h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .avatar-info p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 13px;
+        }
+
+        /* Form elementləri */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .form-group {
             min-width: 0;
         }
 
-
-        .content-body {
-            background-color: #eef2f5;
-
-            flex: 1;
-        }
-
-
-        /* Profile avatar */
-
-        .profile-avatar-container {
-            position: relative;
-
-            width: 100%;
-            max-width: 280px;
-
-            margin: 0 auto;
-
-            aspect-ratio: 4 / 5;
-
-            background-color: #d8dbde;
-
-            border-radius: 4px;
-
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-
-            overflow: hidden;
-        }
-
-
-        .profile-avatar-svg {
-            width: 85%;
-            height: 85%;
-
-            fill: #ffffff;
-        }
-
-
-        .camera-upload-btn {
-            position: absolute;
-
-            bottom: 15px;
-            right: 15px;
-
-            background: transparent;
-
-            border: none;
-
-            color: #2b2b2b;
-
-            font-size: 28px;
-
-            cursor: pointer;
-
-            transition:
-                transform 0.2s ease,
-                color 0.2s ease;
-        }
-
-
-        .camera-upload-btn:hover {
-            transform: scale(1.1);
-            color: #000000;
-        }
-
-
-        /* Form */
-
-        .profile-form-grid {
-            border: 1px solid #e1e6ea;
-
-            border-radius: 4px;
-
-            overflow: hidden;
-        }
-
-
-        .form-row-custom {
-            display: flex;
-
-            border-bottom: 1px solid #e1e6ea;
-
-            background-color: #ffffff;
-        }
-
-
-        .form-row-custom:last-child {
-            border-bottom: none;
-        }
-
-
-        .form-label-custom {
-            width: 160px;
-
-            padding: 12px 16px;
-
-            font-weight: 700;
-
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
             font-size: 13px;
-
-            color: #333333;
-
-            display: flex;
-
-            align-items: center;
-
-            background-color: #ffffff;
-
-            flex-shrink: 0;
-        }
-
-
-        .form-input-custom {
-            flex: 1;
-
-            padding: 8px 12px;
-
-            display: flex;
-
-            align-items: center;
-
-            background-color: #ffffff;
-        }
-
-
-        .form-input-custom .form-control {
-            border: 1px solid #dce1e7;
-
-            border-radius: 3px;
-
-            font-size: 13.5px;
-
-            color: #495057;
-
-            padding: 6px 12px;
-
-            box-shadow: none;
-        }
-
-
-        .form-input-custom .form-control:focus {
-            border-color: #80bdff;
-
-            box-shadow: none;
-        }
-
-
-        .form-action-row {
-            padding: 10px 16px;
-
-            background-color: #ffffff;
-
-            display: flex;
-
-            justify-content: flex-end;
-
-            border-top: 1px solid #e1e6ea;
-        }
-
-
-        .btn-custom-save {
-            background-color: #28a745;
-
-            border-color: #28a745;
-
-            color: #ffffff;
-
-            font-size: 13px;
-
             font-weight: 600;
-
-            padding: 5px 14px;
-
-            border-radius: 4px;
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 6px;
         }
 
-
-        .btn-custom-save:hover {
-            background-color: #218838;
-
-            border-color: #1e7e34;
-
-            color: #ffffff;
+        .form-control {
+            width: 100%;
+            min-width: 0;
+            min-height: 44px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 14px;
+            box-shadow: none;
         }
 
+        .form-control:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.12);
+        }
 
-        /* Breadcrumb */
-
-        .breadcrumb-item + .breadcrumb-item::before {
-            content: "/";
-
+        .form-help {
+            display: block;
+            margin-top: 7px;
             color: #6c757d;
+            font-size: 12px;
         }
 
+        .section-divider {
+            margin: 28px 0;
+            border: 0;
+            border-top: 1px solid #e9ecef;
+        }
 
-        /* Footer */
-
-        .main-footer {
-            background-color: #ffffff;
-
-            border-top: 1px solid #dee2e6;
-
-            padding: 0.8rem 1.5rem;
-
-            font-size: 13px;
-
-            color: #777777;
-
+        .section-title {
+            margin-bottom: 20px;
+            font-size: 16px;
             font-weight: 700;
         }
 
-
-        /* Responsive */
-
-        @media (max-width: 576px) {
-
-            .form-row-custom {
-                display: block;
-            }
-
-            .form-label-custom {
-                width: 100%;
-                padding-bottom: 5px;
-            }
-
-            .form-input-custom {
-                padding-top: 0;
-            }
-
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 28px;
+            padding-top: 22px;
+            border-top: 1px solid #e9ecef;
         }
 
-    </style>
+        .save-button {
+            border: 0;
+            border-radius: 6px;
+            background: #0d6efd;
+            color: #fff;
+            padding: 11px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
+        .save-button:hover {
+            background: #0b5ed7;
+        }
+
+        /* Aşağı panel */
+
+        .footer {
+            padding: 18px 30px;
+            background: #fff;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* Sol menyu bağlandıqda */
+
+        .layout.sidebar-hidden .sidebar {
+            width: 0;
+            min-width: 0;
+        }
+
+        /* Telefon və kiçik ekranlar */
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 220px;
+                min-width: 220px;
+            }
+
+            .layout.sidebar-hidden .sidebar {
+                width: 0;
+                min-width: 0;
+            }
+
+            .page-content {
+                padding: 20px 15px;
+            }
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .form-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 18px;
+            }
+
+            .card-body {
+                padding: 20px 16px;
+            }
+
+            .card-heading {
+                padding: 18px 16px;
+            }
+
+            .page-heading h1 {
+                font-size: 22px;
+            }
+
+            .footer {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .layout {
+                position: relative;
+            }
+
+            .sidebar {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 1000;
+                min-height: 100%;
+                box-shadow: 4px 0 15px rgba(0, 0, 0, 0.12);
+            }
+
+            .layout.sidebar-hidden .sidebar {
+                width: 0;
+                min-width: 0;
+                box-shadow: none;
+            }
+
+            .logout-button {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .profile-avatar {
+                align-items: flex-start;
+            }
+
+            .avatar-circle {
+                width: 65px;
+                height: 65px;
+                min-width: 65px;
+                font-size: 26px;
+            }
+        }
+    </style>
 </head>
 
+<body>
 
-<body class="d-flex min-vh-100">
+<div class="layout" id="layout">
 
+    <!-- SOL MENYU -->
+    <aside class="sidebar">
 
-<!-- Sidebar -->
-
-<aside
-    id="sidebar"
-    class="d-flex flex-column flex-shrink-0 text-white">
-
-
-    <!-- User Profile -->
-
-    <div class="sidebar-user">
-
-        <div class="user-avatar">
-
-            <i class="fa-solid fa-user"></i>
-
+        <div class="sidebar-brand">
+            <div class="brand-logo">O</div>
+            <span class="brand-name">ORIENT ACADEMY</span>
         </div>
 
+        <div class="sidebar-user">
+            <div class="user-icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
 
-        <a
-            href="{% url 'profile' %}"
-            class="teacher-name">
+            <a href="{% url 'profile' %}">
+                {{ teacher.full_name }}
+            </a>
+        </div>
 
-            {{ teacher.full_name }}
+        <div class="sidebar-label">ƏSAS MENYU</div>
 
-        </a>
-
-    </div>
-
-
-    <!-- Navigation -->
-
-    <nav class="sidebar-nav mt-2">
-
-
-        <a
-            href="{% url 'homepage' %}"
-            class="nav-link">
-
+        <a href="{% url 'homepage' %}" class="sidebar-link">
             <i class="fa-solid fa-house"></i>
-
-            <span>ƏSAS SƏHİFƏ</span>
-
+            <span>Əsas səhifə</span>
         </a>
 
-
-        <a
-            href="{% url 'groups' %}"
-            class="nav-link">
-
+        <a href="{% url 'groups' %}" class="sidebar-link">
             <i class="fa-solid fa-users"></i>
-
-            <span>QRUPLAR</span>
-
+            <span>Qruplar</span>
         </a>
 
+        <div class="sidebar-label">HESABAT VƏ HESAB</div>
 
-        <a
-            href="#"
-            class="nav-link">
-
-            <i class="fa-solid fa-building-columns"></i>
-
-            <span>HESABATLAR</span>
-
+        <a href="{% url 'profile' %}" class="sidebar-link active">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>Profil məlumatları</span>
         </a>
 
+    </aside>
 
-    </nav>
+    <!-- SAĞ TƏRƏF -->
+    <div class="main">
 
-</aside>
+        <!-- YUXARI PANEL -->
+        <header class="topbar">
 
+            <button type="button"
+                    class="menu-button"
+                    id="menuButton"
+                    aria-label="Menyunu aç və ya bağla">
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
-<!-- Main Wrapper -->
-
-<div class="main-wrapper">
-
-
-    <!-- Top Navbar -->
-
-    <header
-        class="top-navbar d-flex align-items-center justify-content-between px-3">
-
-
-        <button
-            id="menu-toggle"
-            class="btn btn-link text-secondary p-0 text-decoration-none shadow-none"
-            aria-label="Toggle Sidebar">
-
-            <i class="fa-solid fa-bars fs-5"></i>
-
-        </button>
-
-
-        <div>
-
-            <a
-                href="{% url 'orientlogin' %}"
-                class="text-secondary text-decoration-none"
-                style="font-size: 13px;">
-
+            <a href="{% url 'orientlogin' %}" class="logout-button">
+                <i class="fa-solid fa-right-from-bracket"></i>
                 Çıxış
-
             </a>
 
-        </div>
+        </header>
 
+        <!-- SƏHİFƏ MƏZMUNU -->
+        <main class="page-content">
 
-    </header>
+            <div class="page-heading">
+                <h1>Profil məlumatları</h1>
+                <p>Şəxsi məlumatlarınıza və hesab parametrlərinizə baxın.</p>
+            </div>
 
+            <!-- BÜTÜN SAHƏLƏR EYNİ FORMUN İÇİNDƏDİR -->
+            <form method="POST">
+                {% csrf_token %}
 
-    <!-- Main Content -->
+                <!-- ŞƏXSİ MƏLUMATLAR -->
+                <section class="profile-card">
 
-    <main class="content-body p-4">
+                    <div class="card-heading">
+                        <h2>
+                            <i class="fa-regular fa-user me-2 text-primary"></i>
+                            Şəxsi məlumatlar
+                        </h2>
+                        <p>Adınızı və e-poçt ünvanınızı buradan dəyişə bilərsiniz.</p>
+                    </div>
 
+                    <div class="card-body">
 
-        <!-- Page title -->
+                        <div class="profile-avatar">
+                            <div class="avatar-circle">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
 
-        <div
-            class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center mb-4">
+                            <div class="avatar-info">
+                                <h3>{{ teacher.full_name }}</h3>
+                                <p>Müəllim hesabı</p>
+                            </div>
+                        </div>
 
+                        <div class="form-grid">
 
-            <h2
-                class="h3 fw-normal text-dark mb-2 mb-sm-0"
-                style="font-size: 24px;">
+                            <div class="form-group">
+                                <label for="full_name">Ad və soyad</label>
 
-                Profile / info
+                                <input type="text"
+                                       class="form-control"
+                                       id="full_name"
+                                       name="full_name"
+                                       value="{{ teacher.full_name }}"
+                                       required>
+                            </div>
 
-            </h2>
+                            <div class="form-group">
+                                <label for="email">E-poçt ünvanı</label>
 
-
-            <nav aria-label="breadcrumb">
-
-                <ol
-                    class="breadcrumb mb-0"
-                    style="font-size: 13px;">
-
-
-                    <li class="breadcrumb-item">
-
-                        <a
-                            href="{% url 'homepage' %}"
-                            class="text-primary text-decoration-none">
-
-                            Admin
-
-                        </a>
-
-                    </li>
-
-
-                    <li
-                        class="breadcrumb-item active text-secondary"
-                        aria-current="page">
-
-                        Profile / info
-
-                    </li>
-
-
-                </ol>
-
-            </nav>
-
-        </div>
-
-
-        <!-- Profile -->
-
-        <div class="row g-4">
-
-
-            <!-- Left Column -->
-
-            <div class="col-12 col-md-4 col-lg-3">
-
-
-                <div
-                    class="card border-0 shadow-sm rounded-1 h-100 p-3">
-
-
-                    <div
-                        class="card-body p-0 d-flex align-items-center justify-content-center">
-
-
-                        <div class="profile-avatar-container">
-
-
-                            <!-- User silhouette -->
-
-                            <svg
-                                class="profile-avatar-svg"
-                                viewBox="0 0 100 100"
-                                xmlns="http://www.w3.org/2000/svg">
-
-
-                                <circle
-                                    cx="50"
-                                    cy="38"
-                                    r="24" />
-
-
-                                <path
-                                    d="M 12,100 C 12,68 30,62 50,62 C 70,62 88,68 88,100 Z" />
-
-
-                            </svg>
-
-
-                            <!-- Camera -->
-
-                            <button
-                                class="camera-upload-btn"
-                                title="Şəkli dəyiş"
-                                type="button">
-
-                                <i class="fa-solid fa-camera"></i>
-
-                            </button>
-
+                                <input type="email"
+                                       class="form-control"
+                                       id="email"
+                                       name="email"
+                                       value="{{ teacher.email }}"
+                                       required>
+                            </div>
 
                         </div>
 
                     </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Right Column -->
-
-            <div class="col-12 col-md-8 col-lg-9">
-
-
-                <div
-                    class="card border-0 shadow-sm rounded-1 p-4">
-
-
-                    <div class="card-body p-0">
-
-
-                        <h4
-                            class="fw-bold text-dark mb-4"
-                            style="font-size: 18px;">
-
-                            Personal info
-
-                        </h4>
-
-
-                        <!-- Personal Information -->
-
-                        <form
-                            id="profile-form"
-                            method="POST">
-
-                            {% csrf_token %}
-
-
-                            <div
-                                class="profile-form-grid mb-4">
-
-
-                                <!-- Full Name -->
-
-                                <div class="form-row-custom">
-
-
-                                    <div class="form-label-custom">
-
-                                        Full Name
-
-                                    </div>
-
-
-                                    <div class="form-input-custom">
-
-
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            name="full_name"
-                                            value="{{ teacher.full_name }}"
-                                            required>
-
-
-                                    </div>
-
-                                </div>
-
-
-                                <!-- Email -->
-
-                                <div class="form-row-custom">
-
-
-                                    <div class="form-label-custom">
-
-                                        Email
-
-                                    </div>
-
-
-                                    <div class="form-input-custom">
-
-
-                                        <input
-                                            type="email"
-                                            class="form-control"
-                                            name="email"
-                                            value="{{ teacher.email }}"
-                                            required>
-
-
-                                    </div>
-
-                                </div>
-
-
-                                <!-- Save -->
-
-                                <div class="form-action-row">
-
-
-                                    <button
-                                        type="submit"
-                                        class="btn btn-custom-save">
-
-                                        <i class="fa-solid fa-floppy-disk"></i>
-
-                                        Save
-
-                                    </button>
-
-
-                                </div>
-
-
-                            </div>
-
-
-                            <!-- Password -->
-
-                            <div class="profile-form-grid">
-
-
-                                <div class="form-row-custom">
-
-
-                                    <div class="form-label-custom">
-
-                                        Password
-
-                                    </div>
-
-
-                                    <div class="form-input-custom">
-
-
-                                        <input
-                                            type="password"
-                                            class="form-control"
-                                            name="password"
-                                            placeholder="Yeni parol">
-
-
-                                    </div>
-
-                                </div>
-
-
-                                <!-- Re-Password -->
-
-                                <div class="form-row-custom">
-
-
-                                    <div class="form-label-custom">
-
-                                        Re-Password
-
-                                    </div>
-
-
-                                    <div class="form-input-custom">
-
-
-                                        <input
-                                            type="password"
-                                            class="form-control"
-                                            name="re_password"
-                                            placeholder="Yeni parolu təkrar yazın">
-
-
-                                    </div>
-
-                                </div>
-
-
-                                <!-- Save -->
-
-                                <div class="form-action-row">
-
-
-                                    <button
-                                        type="submit"
-                                        class="btn btn-custom-save">
-
-                                        <i class="fa-solid fa-floppy-disk"></i>
-
-                                        Save
-
-                                    </button>
-
-
-                                </div>
-
-                            </div>
-
-
-                        </form>
-
+                </section>
+
+                <!-- ŞİFRƏ -->
+                <section class="profile-card">
+
+                    <div class="card-heading">
+                        <h2>
+                            <i class="fa-solid fa-lock me-2 text-primary"></i>
+                            Şifrə parametrləri
+                        </h2>
+                        <p>Şifrənizi dəyişmək istədikdə aşağıdakı xanaları doldurun.</p>
                     </div>
 
-                </div>
+                    <div class="card-body">
 
-            </div>
+                        <h3 class="section-title">Şifrənin dəyişdirilməsi</h3>
 
-        </div>
+                        <div class="form-grid">
 
-    </main>
+                            <div class="form-group">
+                                <label for="password">Yeni şifrə</label>
 
+                                <input type="password"
+                                       class="form-control"
+                                       id="password"
+                                       name="password"
+                                       autocomplete="new-password"
+                                       placeholder="Yeni şifrə daxil edin">
 
-    <!-- Footer -->
+                                <span class="form-help">
+                                    Şifrəni dəyişmək istəmirsinizsə, boş saxlayın.
+                                </span>
+                            </div>
 
-    <footer class="main-footer">
+                            <div class="form-group">
+                                <label for="re_password">Yeni şifrənin təkrarı</label>
 
-        Copyright © {% now 'Y-m-d' %} Orient Academy.
+                                <input type="password"
+                                       class="form-control"
+                                       id="re_password"
+                                       name="re_password"
+                                       autocomplete="new-password"
+                                       placeholder="Şifrəni yenidən daxil edin">
+                            </div>
 
-    </footer>
+                        </div>
 
+                        <div class="form-actions">
+                            <button type="submit" class="save-button">
+                                <i class="fa-solid fa-floppy-disk me-2"></i>
+                                Məlumatları yadda saxla
+                            </button>
+                        </div>
 
+                    </div>
+                </section>
+
+            </form>
+
+        </main>
+
+        <!-- AŞAĞI PANEL -->
+        <footer class="footer">
+            © {% now 'Y' %} ORIENT ACADEMY. Bütün hüquqlar qorunur.
+        </footer>
+
+    </div>
 </div>
 
-
-<!-- Bootstrap JS -->
-
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
-</script>
-
-
-<!-- Sidebar Toggle -->
-
 <script>
+    const layout = document.getElementById("layout");
+    const menuButton = document.getElementById("menuButton");
 
-    document
-        .getElementById('menu-toggle')
-        .addEventListener('click', function () {
-
-            document
-                .getElementById('sidebar')
-                .classList
-                .toggle('collapsed');
-
-        });
-
+    menuButton.addEventListener("click", function () {
+        layout.classList.toggle("sidebar-hidden");
+    });
 </script>
-
 
 </body>
-
 </html>
